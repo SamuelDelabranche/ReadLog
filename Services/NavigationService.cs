@@ -9,8 +9,11 @@ namespace ReadLog.Services
 {
     public class NavigationService : ViewModelBase, INavigationService
     {
+        private readonly IViewModelFactory _viewModelFactory;
+        public NavigationService(IViewModelFactory viewModelFactory) => _viewModelFactory = viewModelFactory;
+
 		private ViewModelBase _currentView;
-		public ViewModelBase CurrentView
+        public ViewModelBase CurrentView
         {
 			get
 			{
@@ -24,7 +27,7 @@ namespace ReadLog.Services
 		}
 		public void NavigateTo<TViewModel>() where TViewModel : ViewModelBase
         {
-            throw new NotImplementedException();
+            CurrentView = _viewModelFactory.CreateViewModel(typeof(TViewModel));
         }
     }
 }
