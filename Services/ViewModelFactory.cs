@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace ReadLog.Services
 {
+    public interface IViewModelFactory
+    {
+        ViewModelBase CreateViewModel(Type ViewModelType);
+    }
     public class ViewModelFactory : IViewModelFactory
     {
         private readonly IServiceProvider _serviceProvider;

@@ -17,7 +17,7 @@ namespace ReadLog.MVVM.ViewModels
         public RelayCommand NavigationToHome { get; }
         public INavigationService Navigation { get => _navigationService; }
 
-        public MainViewModel(INavigationService navigationService) : base(navigationService)
+        public MainViewModel(INavigationService navigationService, IDataService<ItemBase> dataService) : base(navigationService, dataService)
         {
             _navigationService.NavigateTo<HomeViewModel>();
 

@@ -17,7 +17,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\Images\" />
-    <Folder Include="MVVM\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Fonts\Poppins-Regular.ttf" />

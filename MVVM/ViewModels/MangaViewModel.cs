@@ -10,7 +10,7 @@ namespace ReadLog.MVVM.ViewModels
 {
     public class MangaViewModel : ViewModelBase
     {
-        public MangaViewModel(INavigationService navigationService) : base(navigationService)
+        public MangaViewModel(INavigationService navigationService, IDataService<ItemBase> dataService) : base(navigationService, dataService)
         {
         }
     }

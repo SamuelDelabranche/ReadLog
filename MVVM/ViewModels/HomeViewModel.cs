@@ -10,7 +10,7 @@ namespace ReadLog.MVVM.ViewModels
 {
     public class HomeViewModel : ViewModelBase
     {
-        public HomeViewModel(INavigationService navigationService) : base(navigationService)
+        public HomeViewModel(INavigationService navigationService, IDataService<ItemBase> dataService) : base(navigationService, dataService)
         {
         }
     }

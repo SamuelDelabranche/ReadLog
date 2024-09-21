@@ -10,7 +10,7 @@ namespace ReadLog.MVVM.ViewModels
 {
     public class LivreViewModel : ViewModelBase
     {
-        public LivreViewModel(INavigationService navigationService) : base(navigationService)
+        public LivreViewModel(INavigationService navigationService, IDataService<ItemBase> dataService) : base(navigationService, dataService)
         {
         }
     }

@@ -12,9 +12,12 @@ namespace ReadLog.Core
     public class ViewModelBase : Observable
     { 
         protected readonly INavigationService _navigationService;
-        public ViewModelBase(INavigationService navigationService)
+        private readonly IDataService<ItemBase> _dataService;
+
+        public ViewModelBase(INavigationService navigationService, IDataService<ItemBase> dataService)
         {
             _navigationService = navigationService;
+            _dataService = dataService;
         }
     }
 }
