@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ReadLog.Services
 {
-    public class NavigationService : ViewModelBase, INavigationService
+    public class NavigationService : Observable, INavigationService
     {
         private readonly IViewModelFactory _viewModelFactory;
         public NavigationService(IViewModelFactory viewModelFactory) => _viewModelFactory = viewModelFactory;

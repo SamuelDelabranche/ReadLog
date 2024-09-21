@@ -5,8 +5,89 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ReadLog"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="ReadLog"
+        Height="600"
+        Width="1000"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize">
+    <Border BorderBrush="White"
+            BorderThickness="0.5">
+        <Grid Background="#272537">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Border Grid.ColumnSpan="2"
+                    Grid.Row="0"
+                    BorderThickness="0 0 0 0.5"
+                    BorderBrush="White" />
+
+            <Border Grid.RowSpan="2"
+                    Grid.Row="0"
+                    BorderThickness="0 0 0.5 0"
+                    BorderBrush="White" />
+
+            <TextBlock Text="ReadLog"
+                       Foreground="White"
+                       VerticalAlignment="Center"
+                       Margin="20 0 0 0 "
+                       FontSize="22"
+                       FontFamily="/Assets/Fonts/#Poppins" />
+
+
+            <Grid Grid.Column="1"
+                  MouseDown="Grid_MouseDown"
+                  Background="Transparent">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="1"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            Margin="0 0 20 0">
+                    <Button Style="{StaticResource TopButton}"
+                            Click="Button_Reduce">
+                        <TextBlock Text="_"
+                                   Padding="0 0 0 5" />
+                    </Button>
+                    <Button Style="{StaticResource TopButton}"
+                            Click="Button_Close"
+                            Content="X"
+                            HorizontalAlignment="Right" />
+                </StackPanel>
+
+                <TextBox Style="{StaticResource searchBox}" />
+            </Grid>
+
+            <StackPanel Grid.Row="1">
+                <RadioButton Content="Home"
+                             Style="{StaticResource MenuButton}"
+                             IsChecked="True"
+                             Command="{Binding NavigationToHome}" />
+                <RadioButton Content="Manga"
+                             Style="{StaticResource MenuButton}"
+                             Command="{Binding NavigationToManga}" />
+                <RadioButton Content="Livres"
+                             Style="{StaticResource MenuButton}"
+                             Command="{Binding NavigationToLivre}" />
+                <RadioButton Content="Options"
+                             Style="{StaticResource MenuButton}"
+                             Command="{Binding NavigationToSettings}" />
+            </StackPanel>
+
+            <ContentControl Grid.Row="1"
+                            Grid.Column="1"
+                            Content="{Binding Navigation.CurrentView}" />
+
+        </Grid>
+    </Border>
 </Window>

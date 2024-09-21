@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReadLog.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -8,13 +9,12 @@ using System.Threading.Tasks;
 
 namespace ReadLog.Core
 {
-    public class ViewModelBase : INotifyPropertyChanged
-    {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    public class ViewModelBase : Observable
+    { 
+        protected readonly INavigationService _navigationService;
+        public ViewModelBase(INavigationService navigationService)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            _navigationService = navigationService;
         }
     }
 }

@@ -24,5 +24,22 @@ namespace ReadLog
         {
             InitializeComponent();
         }
+
+        private void Button_Close(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void Button_Reduce(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ButtonState == MouseButtonState.Pressed)
+            {
+                this.DragMove();
+            }
+        }
     }
 }
