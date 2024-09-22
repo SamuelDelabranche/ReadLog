@@ -1,4 +1,5 @@
 ﻿using ReadLog.Core;
+using ReadLog.MVVM.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,20 +20,20 @@ namespace ReadLog.Services
         private readonly IViewModelFactory _viewModelFactory;
         public NavigationService(IViewModelFactory viewModelFactory) => _viewModelFactory = viewModelFactory;
 
-		private ViewModelBase _currentView;
+        private ViewModelBase _currentView;
         public ViewModelBase CurrentView
         {
-			get
-			{
-				return _currentView;
-			}
-			set
-			{
-				_currentView = value;
-				OnPropertyChanged(nameof(CurrentView));
-			}
-		}
-		public void NavigateTo<TViewModel>() where TViewModel : ViewModelBase
+            get
+            {
+                return _currentView;
+            }
+            set
+            {
+                _currentView = value;
+                OnPropertyChanged(nameof(CurrentView));
+            }
+        }
+        public void NavigateTo<TViewModel>() where TViewModel : ViewModelBase
         {
             CurrentView = _viewModelFactory.CreateViewModel(typeof(TViewModel));
         }

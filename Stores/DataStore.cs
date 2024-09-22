@@ -20,13 +20,8 @@ namespace ReadLog.Stores
             _dataService = dataService;
             Items = new ObservableCollection<TObject>
             {
-                (TObject)(object)new Manga {
-                    Name = "test",
-                    CoverART_ID = "test",
-                    CoverArt_Path = "test",
-                    Description = "test",
-                    ID = "test"
-                }
+                (TObject)(object)new Manga("Solo leveling", "9172001AF"),
+                (TObject)(object)new Manga("Tales Of Demon And Gods", "9172001AF", true, "Lorem ipsum odor amet, consectetuer adipiscing elit. Morbi quam dis porta natoque sociosqu sollicitudin interdum. Imperdiet nisi eleifend pellentesque phasellus platea eu iaculis dictumst curae. Nulla blandit ex pellentesque pharetra tempus sodales ut.")
             };
 
         }

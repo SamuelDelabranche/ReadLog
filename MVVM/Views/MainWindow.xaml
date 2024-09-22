@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ReadLog"
+        xmlns:converters="clr-namespace:ReadLog.Converters"
         mc:Ignorable="d"
         Title="ReadLog"
         Height="600"
@@ -11,6 +12,11 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize">
+
+    <Window.Resources>
+        <converters:BoolToVisilibitySearchBox x:Key="BoolToVisilibitySearchBox" />
+    </Window.Resources>
+
     <Border BorderBrush="White"
             BorderThickness="0.5">
         <Grid Background="#272537">
@@ -65,7 +71,8 @@
                             HorizontalAlignment="Right" />
                 </StackPanel>
 
-                <TextBox Style="{StaticResource searchBox}" />
+                <TextBox Style="{StaticResource searchBox}"
+                         Visibility="{Binding isMangaViewEnabled, Converter={StaticResource BoolToVisilibitySearchBox   }}" />
             </Grid>
 
             <StackPanel Grid.Row="1">
@@ -93,7 +100,9 @@
 
             <ContentControl Grid.Row="1"
                             Grid.Column="1"
-                            Content="{Binding Navigation.CurrentView}" />
+                            Content="{Binding Navigation.CurrentView}"
+                            Padding="0"
+                            Width="850" />
 
         </Grid>
     </Border>

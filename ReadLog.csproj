@@ -8,6 +8,8 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Assets\Fonts\Poppins-Regular.ttf" />
+    <None Remove="Assets\Images\like.png" />
+    <None Remove="Assets\Images\unlike.png" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
@@ -16,9 +18,8 @@
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Assets\Images\" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Assets\Fonts\Poppins-Regular.ttf" />
+    <Resource Include="Assets\Images\like.png" />
+    <Resource Include="Assets\Images\unlike.png" />
   </ItemGroup>
 </Project>

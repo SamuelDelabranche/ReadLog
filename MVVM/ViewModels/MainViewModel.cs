@@ -12,7 +12,6 @@ namespace ReadLog.MVVM.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-
         public RelayCommand NavigationToLivre { get; }
         public RelayCommand NavigationToSettings { get; }
         public RelayCommand NavigationToManga { get; }
@@ -27,7 +26,6 @@ namespace ReadLog.MVVM.ViewModels
             NavigationToManga = new RelayCommand(execute => _navigationService.NavigateTo<MangaViewModel>());
             NavigationToSettings = new RelayCommand(execute => _navigationService.NavigateTo<SettingsViewModel>());
         }
-
 
     }
 }
