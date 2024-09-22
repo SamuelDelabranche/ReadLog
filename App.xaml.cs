@@ -27,14 +27,13 @@ namespace ReadLog
         {
             _services.AddSingleton<MainViewModel>();
             _services.AddSingleton<HomeViewModel>();
-            _services.AddSingleton<LivreViewModel>();
             _services.AddSingleton<MangaViewModel>();
             _services.AddSingleton<SettingsViewModel>();
 
             _services.AddSingleton<INavigationService,  NavigationService>();
             _services.AddSingleton<IViewModelFactory, ViewModelFactory>();
-            _services.AddSingleton<IDataService<ItemBase>, DataService<ItemBase>>();
-            _services.AddSingleton<DataStore<ItemBase>>();
+            _services.AddSingleton<IDataService<Manga>, DataService<Manga>>();
+            _services.AddSingleton<DataStore<Manga>>();
 
             _services.AddSingleton<MainWindow>(provider => new MainWindow()
             {

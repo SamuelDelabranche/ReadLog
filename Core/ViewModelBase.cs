@@ -1,4 +1,6 @@
-﻿using ReadLog.Services;
+﻿using ReadLog.MVVM.Models;
+using ReadLog.Services;
+using ReadLog.Stores;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,12 +14,12 @@ namespace ReadLog.Core
     public class ViewModelBase : Observable
     { 
         protected readonly INavigationService _navigationService;
-        private readonly IDataService<ItemBase> _dataService;
+        private readonly DataStore<Manga> _datatStore;
 
-        public ViewModelBase(INavigationService navigationService, IDataService<ItemBase> dataService)
+        public ViewModelBase(INavigationService navigationService, DataStore<Manga> dataStore)
         {
             _navigationService = navigationService;
-            _dataService = dataService;
+            _datatStore = dataStore;
         }
     }
 }

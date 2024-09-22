@@ -1,4 +1,5 @@
-﻿using ReadLog.Services;
+﻿using ReadLog.MVVM.Models;
+using ReadLog.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,7 +18,17 @@ namespace ReadLog.Stores
         public DataStore(IDataService<TObject> dataService)
         {
             _dataService = dataService;
-            Items = new ObservableCollection<TObject>();
+            Items = new ObservableCollection<TObject>
+            {
+                (TObject)(object)new Manga {
+                    Name = "test",
+                    CoverART_ID = "test",
+                    CoverArt_Path = "test",
+                    Description = "test",
+                    ID = "test"
+                }
+            };
+
         }
 
         public async Task LoadDataAsync(string filepath)
@@ -31,4 +42,4 @@ namespace ReadLog.Stores
 
         }
     }
-}   
+}

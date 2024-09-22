@@ -1,5 +1,7 @@
 ﻿using ReadLog.Core;
+using ReadLog.MVVM.Models;
 using ReadLog.Services;
+using ReadLog.Stores;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,12 +19,11 @@ namespace ReadLog.MVVM.ViewModels
         public RelayCommand NavigationToHome { get; }
         public INavigationService Navigation { get => _navigationService; }
 
-        public MainViewModel(INavigationService navigationService, IDataService<ItemBase> dataService) : base(navigationService, dataService)
+        public MainViewModel(INavigationService navigationService, DataStore<Manga> dataStore) : base(navigationService, dataStore)
         {
             _navigationService.NavigateTo<HomeViewModel>();
 
             NavigationToHome = new RelayCommand(execute => _navigationService.NavigateTo<HomeViewModel>());
-            NavigationToLivre = new RelayCommand(execute => _navigationService.NavigateTo<LivreViewModel>());
             NavigationToManga = new RelayCommand(execute => _navigationService.NavigateTo<MangaViewModel>());
             NavigationToSettings = new RelayCommand(execute => _navigationService.NavigateTo<SettingsViewModel>());
         }

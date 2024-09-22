@@ -76,9 +76,6 @@
                 <RadioButton Content="Manga"
                              Style="{StaticResource MenuButton}"
                              Command="{Binding NavigationToManga}" />
-                <RadioButton Content="Livres"
-                             Style="{StaticResource MenuButton}"
-                             Command="{Binding NavigationToLivre}" />
                 <RadioButton Content="Options"
                              Style="{StaticResource MenuButton}"
                              Command="{Binding NavigationToSettings}" />

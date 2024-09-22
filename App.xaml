@@ -19,10 +19,6 @@
                 <views:MangaView />
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewModel:LivreViewModel}">
-                <views:LivreView/>
-            </DataTemplate>
-            
             <DataTemplate DataType="{x:Type viewModel:SettingsViewModel}">
                 <views:SettingsView />
             </DataTemplate>
