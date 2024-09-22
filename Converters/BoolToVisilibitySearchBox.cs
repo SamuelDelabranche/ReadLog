@@ -13,12 +13,16 @@ namespace ReadLog.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (bool)value ? Visibility.Hidden : Visibility.Hidden;
+            if (value is bool isVisible)
+            {
+                return isVisible ? Visibility.Visible : Visibility.Hidden;
+            }
+            return Visibility.Hidden;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            return (value is Visibility visibility) && visibility == Visibility.Visible;
         }
     }
 }

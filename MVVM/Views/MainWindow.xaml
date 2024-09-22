@@ -72,7 +72,7 @@
                 </StackPanel>
 
                 <TextBox Style="{StaticResource searchBox}"
-                         Visibility="{Binding isMangaViewEnabled, Converter={StaticResource BoolToVisilibitySearchBox   }}" />
+                         Visibility="{Binding isTextBoxVisible, Converter={StaticResource BoolToVisilibitySearchBox   }}" />
             </Grid>
 
             <StackPanel Grid.Row="1">

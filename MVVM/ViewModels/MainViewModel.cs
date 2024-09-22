@@ -12,6 +12,19 @@ namespace ReadLog.MVVM.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
+        private bool _isTextBoxVisible;
+        public bool isTextBoxVisible
+        {
+            get
+            {
+                return _isTextBoxVisible;
+            }
+            set
+            {
+                _isTextBoxVisible = value;
+                OnPropertyChanged();
+            }
+        }
         public RelayCommand NavigationToLivre { get; }
         public RelayCommand NavigationToSettings { get; }
         public RelayCommand NavigationToManga { get; }
@@ -20,11 +33,30 @@ namespace ReadLog.MVVM.ViewModels
 
         public MainViewModel(INavigationService navigationService, DataStore<Manga> dataStore) : base(navigationService, dataStore)
         {
+            _isTextBoxVisible = false;
             _navigationService.NavigateTo<HomeViewModel>();
 
-            NavigationToHome = new RelayCommand(execute => _navigationService.NavigateTo<HomeViewModel>());
-            NavigationToManga = new RelayCommand(execute => _navigationService.NavigateTo<MangaViewModel>());
-            NavigationToSettings = new RelayCommand(execute => _navigationService.NavigateTo<SettingsViewModel>());
+            NavigationToHome = new RelayCommand(execute => NavigateToPage(0));
+            NavigationToManga = new RelayCommand(execute => NavigateToPage(1));
+            NavigationToSettings = new RelayCommand(execute => NavigateToPage(2));
+        }
+
+        private void NavigateToPage(int page)
+        {
+            switch (page)
+            {
+                case 0:
+                    _navigationService.NavigateTo<HomeViewModel>();
+                    isTextBoxVisible = false; break;
+
+                case 1:
+                    _navigationService.NavigateTo<MangaViewModel>();
+                    isTextBoxVisible = true; break;
+
+                case 2:
+                    _navigationService.NavigateTo<SettingsViewModel>();
+                    isTextBoxVisible = false; break;
+            }
         }
 
     }
