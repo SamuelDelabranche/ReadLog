@@ -60,19 +60,23 @@
                             Orientation="Horizontal"
                             HorizontalAlignment="Right"
                             Margin="0 0 20 0">
-                    <Button Style="{StaticResource TopButton}"
-                            Click="Button_Reduce">
+                    <Button Click="Button_Reduce"
+                            Style="{StaticResource TopButton}">
                         <TextBlock Text="_"
                                    Padding="0 0 0 5" />
                     </Button>
-                    <Button Style="{StaticResource TopButton}"
-                            Click="Button_Close"
+                    <Button Click="Button_Close"
+                            Style="{StaticResource TopButton}"
                             Content="X"
                             HorizontalAlignment="Right" />
                 </StackPanel>
 
-                <TextBox Style="{StaticResource searchBox}"
-                         Visibility="{Binding isTextBoxVisible, Converter={StaticResource BoolToVisilibitySearchBox   }}" />
+                <TextBox Text="{Binding textBoxSearch, UpdateSourceTrigger=PropertyChanged}"
+                         Style="{StaticResource searchBox}"
+                         Visibility="{Binding isTextBoxVisible, Converter={StaticResource BoolToVisilibitySearchBox}}"
+                         Foreground="White"
+                         VerticalContentAlignment="Center" 
+                         Padding="5 0 0 0"/>
             </Grid>
 
             <StackPanel Grid.Row="1">

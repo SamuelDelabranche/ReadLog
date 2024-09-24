@@ -92,15 +92,15 @@
 
 
     </UserControl.Resources>
-
-    <ListView ItemsSource="{Binding Items}"
+    <ListView ItemsSource="{Binding FilteredItems}"
               Background="#3a384d"
               ScrollViewer.HorizontalScrollBarVisibility="Disabled"
               HorizontalAlignment="Stretch"
               VerticalAlignment="Stretch"
               BorderThickness="0"
               Margin="0"
-              Padding="10">
+              Padding="10"
+              Name="DataListView">
         <ListView.View>
             <GridView>
                 <GridViewColumn Header="Favorite"

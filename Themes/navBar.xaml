@@ -51,18 +51,15 @@
                             CornerRadius="10"
                             Height="30"
                             Width="200">
-
                         <Grid>
                             <Rectangle StrokeThickness="1" />
-                            <TextBox Margin="1"
-                                     Text="{TemplateBinding Text}"
-                                     BorderThickness="0"
-                                     Background="Transparent"
-                                     VerticalContentAlignment="Center"
-                                     Padding="5"
-                                     Foreground="#CFCFCF"
-                                     x:Name="search" />
 
+                            <!-- Correct way to handle text content in a TextBox template -->
+                            <ScrollViewer x:Name="PART_ContentHost"
+                                          Margin="5"
+                                          VerticalContentAlignment="Center" />
+
+                            <!-- Placeholder Text (Hint) -->
                             <TextBlock IsHitTestVisible="False"
                                        Text="Recherchez votre manga"
                                        VerticalAlignment="Center"
@@ -74,7 +71,8 @@
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Text, ElementName=search}"
+                                            <!-- Binding to the TextBox's text to hide/show the hint -->
+                                            <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}"
                                                          Value="">
                                                 <Setter Property="Visibility"
                                                         Value="Visible" />
@@ -85,12 +83,11 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                                       
                         </Grid>
-                        
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
+
 </ResourceDictionary>

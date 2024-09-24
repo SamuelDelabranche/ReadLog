@@ -12,6 +12,22 @@ namespace ReadLog.MVVM.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
+
+        private string _textBoxSearch;
+        public string textBoxSearch
+        {
+            get
+            {
+                return _textBoxSearch;
+            }
+            set
+            {
+                _textBoxSearch = value;
+                _listViewFilterService.SetFilterText(_textBoxSearch);
+                OnPropertyChanged(nameof(textBoxSearch));
+            }
+        }
+
         private bool _isTextBoxVisible;
         public bool isTextBoxVisible
         {
@@ -31,9 +47,13 @@ namespace ReadLog.MVVM.ViewModels
         public RelayCommand NavigationToHome { get; }
         public INavigationService Navigation { get => _navigationService; }
 
-        public MainViewModel(INavigationService navigationService, DataStore<Manga> dataStore) : base(navigationService, dataStore)
+        private readonly IListViewFilterService _listViewFilterService;
+
+        public MainViewModel(INavigationService navigationService, DataStore<Manga> dataStore, IListViewFilterService listViewFilterService) : base(navigationService, dataStore)
         {
             _isTextBoxVisible = false;
+            _listViewFilterService = listViewFilterService;
+
             _navigationService.NavigateTo<HomeViewModel>();
 
             NavigationToHome = new RelayCommand(execute => NavigateToPage(0));
