@@ -8,6 +8,9 @@ using System.Text;
 using ReadLog.MVVM.Models;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using ReadLog.MVVM.Views;
+using System.Windows;
 
 namespace ReadLog.MVVM.ViewModels
 {
@@ -21,14 +24,23 @@ namespace ReadLog.MVVM.ViewModels
         public ObservableCollection<Manga> FilteredItems { get; set; }
 
         private readonly IListViewFilterService _listViewFilterService;
-        public MangaViewModel(INavigationService navigationService, DataStore<Manga> dataStore, IListViewFilterService listViewFilterService) : base(navigationService, dataStore)
+        private readonly IServiceProvider _serviceProvider;
+
+        private readonly Window _addMangaWindow;
+        public MangaViewModel(INavigationService navigationService, DataStore<Manga> dataStore, IListViewFilterService listViewFilterService, IServiceProvider serviceProvider) : base(navigationService, dataStore)
         {
             InitData("../../../Stores/Data.json", dataStore);
 
-            _listViewFilterService = listViewFilterService;
-
             AddMangaCommand = new RelayCommand(execute => NavigateAddView());
 
+            _serviceProvider = serviceProvider;
+
+            var mainWindow = serviceProvider.GetRequiredService<MainWindow>();
+            _addMangaWindow = serviceProvider.GetRequiredService<AddMangaWindow>();
+
+            _addMangaWindow.Owner = mainWindow;
+
+            _listViewFilterService = listViewFilterService;
             _listViewFilterService.FilterTextChanged += OnFilterTextChanged;
         }
 
@@ -44,16 +56,16 @@ namespace ReadLog.MVVM.ViewModels
 
             else
             {
-                
+
                 var itemFiltered = Items.Where(manga => manga.Name.ToLower().Contains(_filterText)).ToList();
                 foreach (var item in itemFiltered) { FilteredItems.Add(item); }
             }
-    
+
         }
 
         private void NavigateAddView()
         {
-
+            _addMangaWindow.ShowDialog();
         }
 
         private async void InitData(string filePath, DataStore<Manga> dataStore)

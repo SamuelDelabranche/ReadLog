@@ -2,6 +2,7 @@
 using ReadLog.Core;
 using ReadLog.MVVM.Models;
 using ReadLog.MVVM.ViewModels;
+using ReadLog.MVVM.Views;
 using ReadLog.Services;
 using ReadLog.Stores;
 using System;
@@ -26,6 +27,8 @@ namespace ReadLog
         public App()
         {
             _services.AddSingleton<MainViewModel>();
+            _services.AddSingleton<AddMangaViewModel>();
+
             _services.AddSingleton<HomeViewModel>();
             _services.AddSingleton<MangaViewModel>();
             _services.AddSingleton<SettingsViewModel>();
@@ -40,7 +43,11 @@ namespace ReadLog
             {
                 DataContext = _serviceProvider.GetRequiredService<MainViewModel>()
             });
-            
+
+            _services.AddSingleton<AddMangaWindow>(provider => new AddMangaWindow()
+            {
+                DataContext = _serviceProvider.GetRequiredService<AddMangaViewModel>()
+            });
 
             _serviceProvider = _services.BuildServiceProvider();
         }
