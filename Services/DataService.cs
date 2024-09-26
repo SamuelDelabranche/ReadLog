@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.Json;
 using System.IO;
+using System.Diagnostics;
 
 namespace ReadLog.Services
 {
@@ -18,11 +19,39 @@ namespace ReadLog.Services
     {
         public async Task<List<TObject>> LoadDataAsync(string filePath)
         {
-            if (File.Exists(filePath))
+
+            if (!File.Exists(filePath))
+            {
+                return new List<TObject>();
+            }
+
+            try
             {
                 var json = await File.ReadAllTextAsync(filePath);
-                return JsonSerializer.Deserialize<List<TObject>>(json);
-            }return new List<TObject>();
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true,
+                };
+
+                var result = JsonSerializer.Deserialize<List<TObject>>(json, options);
+
+
+                Debug.WriteLine("SUCCESS JSON LOADING");
+                Debug.WriteLine("Contenu du JSON : " + json);
+
+                return result ?? new List<TObject>();
+
+            }
+            catch (JsonException ex)
+            {
+                Debug.WriteLine("ERROR ", ex.Message);
+                return new List<TObject>();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ERROR ", ex.Message);
+                return new List<TObject>();
+            }
         }
     }
 }

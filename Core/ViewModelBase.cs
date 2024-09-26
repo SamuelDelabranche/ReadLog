@@ -14,7 +14,7 @@ namespace ReadLog.Core
     public class ViewModelBase : Observable
     { 
         protected readonly INavigationService _navigationService;
-        private readonly DataStore<Manga> _datatStore;
+        protected readonly DataStore<Manga> _datatStore;
 
         public ViewModelBase(INavigationService navigationService, DataStore<Manga> dataStore)
         {
