@@ -29,21 +29,26 @@
 
                 <Border Grid.ColumnSpan="2"
                         BorderBrush="White"
-                        BorderThickness="0 0 0 0.5" />
+                        BorderThickness="0 0 0 0.5">
+                    <Grid MouseDown="Border_MouseDown">
+                        <TextBlock Text="Ajout Manga"
+                                   Foreground="White"
+                                   VerticalAlignment="Center"
+                                   Margin="20 0 0 0 "
+                                   FontSize="18"
+                                   FontFamily="/Assets/Fonts/#Poppins" />
 
-                <TextBlock Text="Ajout Manga"
-                           Foreground="White"
-                           VerticalAlignment="Center"
-                           Margin="20 0 0 0 "
-                           FontSize="18"
-                           FontFamily="/Assets/Fonts/#Poppins" />
+                        <Button Grid.Column="1"
+                                Click="Button_Click"
+                                Style="{StaticResource TopButton}"
+                                Content="X"
+                                HorizontalAlignment="Right"
+                                Margin="0 0 20 0" />
+                    </Grid>
 
-                <Button Grid.Column="1"
-                        Click="Button_Click"
-                        Style="{StaticResource TopButton}"
-                        Content="X"
-                        HorizontalAlignment="Right"
-                        Margin="0 0 20 0"/>
+                </Border>
+
+
 
             </Grid>
 
@@ -62,15 +67,16 @@
 
                 <StackPanel Grid.Row="1">
                     <Label Content="Nombre de chapitre(s) lu(s)" />
-                    <TextBox PreviewTextInput="TextBox_PreviewTextInput"/>
+                    <TextBox PreviewTextInput="TextBox_PreviewTextInput" />
                 </StackPanel>
 
                 <StackPanel Grid.Row="2">
                     <Label Content="Favoris" />
-                    <CheckBox/>
+                    <CheckBox />
                 </StackPanel>
 
-                <Button Grid.Row="3" Content="Ajouter" />
+                <Button Grid.Row="3"
+                        Content="Ajouter" />
             </Grid>
 
         </Grid>

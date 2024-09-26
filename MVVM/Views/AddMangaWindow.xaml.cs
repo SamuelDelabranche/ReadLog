@@ -38,5 +38,13 @@ namespace ReadLog.MVVM.Views
         {
             return (int.TryParse(text, out _));
         }
+
+        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ButtonState == MouseButtonState.Pressed)
+            {
+                this.DragMove();
+            }
+        }
     }
 }
