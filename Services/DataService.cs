@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Text.Json;
 using System.IO;
 using System.Diagnostics;
+using ReadLog.MVVM.Models;
 
 namespace ReadLog.Services
 {
@@ -35,9 +36,7 @@ namespace ReadLog.Services
 
                 var result = JsonSerializer.Deserialize<List<TObject>>(json, options);
 
-
                 Debug.WriteLine("SUCCESS JSON LOADING");
-                Debug.WriteLine("Contenu du JSON : " + json);
 
                 return result ?? new List<TObject>();
 

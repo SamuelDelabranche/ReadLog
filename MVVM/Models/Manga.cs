@@ -15,6 +15,7 @@ namespace ReadLog.MVVM.Models
         public string CoverART_ID { get; set; }
         public string CoverArt_Path { get; set; }
         public bool isFavorite { get; set; }
+        public int nombreChapitreLus { get; set; }
 
     }
 }

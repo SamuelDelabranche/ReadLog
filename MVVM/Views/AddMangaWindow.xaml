@@ -7,9 +7,72 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
         Title="Ajouter votre Manga"
+        ResizeMode="NoResize"
+        WindowStyle="None"
         Height="400"
         Width="300">
-    <Grid>
+    <Border BorderBrush="White"
+            BorderThickness="0.5">
+        <Grid Background="#272537">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition />
 
-    </Grid>
+            </Grid.RowDefinitions>
+
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.ColumnSpan="2"
+                        BorderBrush="White"
+                        BorderThickness="0 0 0 0.5" />
+
+                <TextBlock Text="Ajout Manga"
+                           Foreground="White"
+                           VerticalAlignment="Center"
+                           Margin="20 0 0 0 "
+                           FontSize="18"
+                           FontFamily="/Assets/Fonts/#Poppins" />
+
+                <Button Grid.Column="1"
+                        Click="Button_Click"
+                        Style="{StaticResource TopButton}"
+                        Content="X"
+                        HorizontalAlignment="Right"
+                        Margin="0 0 20 0"/>
+
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <StackPanel>
+                    <Label Content="Nom du manga" />
+                    <TextBox Text="" />
+                </StackPanel>
+
+                <StackPanel Grid.Row="1">
+                    <Label Content="Nombre de chapitre(s) lu(s)" />
+                    <TextBox PreviewTextInput="TextBox_PreviewTextInput"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2">
+                    <Label Content="Favoris" />
+                    <CheckBox/>
+                </StackPanel>
+
+                <Button Grid.Row="3" Content="Ajouter" />
+            </Grid>
+
+        </Grid>
+    </Border>
 </Window>
