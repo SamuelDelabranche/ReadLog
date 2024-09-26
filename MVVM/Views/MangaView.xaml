@@ -37,6 +37,47 @@
             </Setter>
         </Style>
 
+        <Style x:Key="ListViewAddButton"
+               TargetType="Button">
+
+            <Setter Property="Background"
+                    Value="#75719c" />
+            <Setter Property="Foreground"
+                    Value="White" />
+            <Setter Property="Margin"
+                    Value="5" />
+            <Setter Property="Height"
+                    Value="30" />
+            <Setter Property="FontSize"
+                    Value="26" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Center" />
+            <Setter Property="VerticalContentAlignment"
+                    Value="Center" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="Transparent"
+                                BorderThickness="0"
+                                CornerRadius="10">
+                            <ContentPresenter Content="{TemplateBinding Content}"
+                                              HorizontalAlignment="Center"
+                                              Margin="0,-5,0,-5" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+                                <Setter Property="Background"
+                                        Value="#646184" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+
         <Style x:Key="CenteredTextBlock"
                TargetType="TextBlock">
             <Setter Property="Foreground"
@@ -89,9 +130,9 @@
             </Style.Triggers>
         </Style>
 
-
-
     </UserControl.Resources>
+
+
     <ListView ItemsSource="{Binding FilteredItems}"
               Background="#3a384d"
               ScrollViewer.HorizontalScrollBarVisibility="Disabled"
@@ -101,6 +142,32 @@
               Margin="0"
               Padding="10"
               Name="DataListView">
+
+        <ListView.Template>
+            <ControlTemplate TargetType="ListView">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <GridViewHeaderRowPresenter Grid.Row="0"
+                                                Columns="{Binding Path=View.Columns, RelativeSource={RelativeSource TemplatedParent}}" />
+
+                    <Button Grid.Row="1"
+                            Content="+"
+                            Style="{StaticResource ListViewAddButton}" 
+                            Command="{Binding AddMangaCommand}"/>
+
+                    <ScrollViewer Grid.Row="2"
+                                  CanContentScroll="True">
+                        <ItemsPresenter />
+                    </ScrollViewer>
+                </Grid>
+            </ControlTemplate>
+        </ListView.Template>
+
         <ListView.View>
             <GridView>
                 <GridViewColumn Header="Favorite"

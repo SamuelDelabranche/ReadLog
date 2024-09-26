@@ -14,6 +14,8 @@ namespace ReadLog.MVVM.ViewModels
     public class MangaViewModel : ViewModelBase
     {
 
+        public RelayCommand AddMangaCommand { get; }
+
         private string _filterText;
         private ObservableCollection<Manga> Items;
         public ObservableCollection<Manga> FilteredItems { get; }
@@ -24,6 +26,8 @@ namespace ReadLog.MVVM.ViewModels
             Items = dataStore.Items;
             FilteredItems = new ObservableCollection<Manga>(Items);
             _listViewFilterService = listViewFilterService;
+
+            AddMangaCommand = new RelayCommand(execute => NavigateAddView());
 
             _listViewFilterService.FilterTextChanged += OnFilterTextChanged;
         }
@@ -44,6 +48,11 @@ namespace ReadLog.MVVM.ViewModels
                 var itemFiltered = Items.Where(manga => manga.Name.ToLower().Contains(_filterText)).ToList();
                 foreach (var item in itemFiltered) { FilteredItems.Add(item); }
             }
+    
+        }
+
+        private void NavigateAddView()
+        {
 
         }
 
