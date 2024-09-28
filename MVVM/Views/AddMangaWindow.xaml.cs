@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReadLog.MVVM.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,7 +27,12 @@ namespace ReadLog.MVVM.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            if ( DataContext is AddMangaViewModel addMangaViewModel)
+            {
+                addMangaViewModel.resetUI();
+            }
+            this.Visibility = Visibility.Hidden;
+
         }
 
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -46,5 +52,6 @@ namespace ReadLog.MVVM.Views
                 this.DragMove();
             }
         }
+
     }
 }

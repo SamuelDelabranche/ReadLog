@@ -70,6 +70,8 @@
                                      Value="True">
                                 <Setter Property="Background"
                                         Value="#646184" />
+                                <Setter Property="Cursor"
+                                        Value="Hand" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

@@ -11,6 +11,18 @@
         WindowStyle="None"
         Height="400"
         Width="300">
+    <Window.Resources>
+        <Style TargetType="Label"
+               BasedOn="{StaticResource MangaLabel}" />
+        <Style TargetType="TextBox"
+               BasedOn="{StaticResource MangaTextBox}" />
+        <Style TargetType="CheckBox"
+               BasedOn="{StaticResource MangaCheckBox}" />
+        <Style TargetType="Button"
+               BasedOn="{StaticResource MangaButton}" />    
+    </Window.Resources>
+
+    
     <Border BorderBrush="White"
             BorderThickness="0.5">
         <Grid Background="#272537">
@@ -52,7 +64,7 @@
 
             </Grid>
 
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="1" Margin="25">
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition />
@@ -62,17 +74,17 @@
 
                 <StackPanel>
                     <Label Content="Nom du manga" />
-                    <TextBox Text="" />
+                    <TextBox Text="{Binding MangaName}" />
                 </StackPanel>
 
                 <StackPanel Grid.Row="1">
-                    <Label Content="Nombre de chapitre(s) lu(s)" />
-                    <TextBox PreviewTextInput="TextBox_PreviewTextInput" />
+                    <Label Content="Nombre de chapitres lus" />
+                    <TextBox Text="{Binding NumberChapiter}" PreviewTextInput="TextBox_PreviewTextInput" />
                 </StackPanel>
 
                 <StackPanel Grid.Row="2">
                     <Label Content="Favoris" />
-                    <CheckBox />
+                    <CheckBox IsChecked="{Binding IsFavorite}"/>
                 </StackPanel>
 
                 <Button Grid.Row="3"

@@ -9,6 +9,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/navBar.xaml" />
                 <ResourceDictionary Source="Themes/menuBar.xaml" />
+                <ResourceDictionary Source="Themes/AddMangaViewTheme.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
