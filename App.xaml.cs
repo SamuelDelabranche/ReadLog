@@ -28,9 +28,12 @@ namespace ReadLog
             _services.AddSingleton<IViewModelFactory, ViewModelFactory>();
             _services.AddSingleton<IDataService<Manga>, DataService<Manga>>();
             _services.AddSingleton<IListViewFilterService, ListViewFilterService>();
+<<<<<<< HEAD
 
             _services.AddSingleton<IMangaApiClient, MangaApiClient>();
 
+=======
+>>>>>>> origin/master
             _services.AddSingleton<IMangaApiClient, MangaApiClient>();
             _services.AddSingleton<DataStore<Manga>>();
 
