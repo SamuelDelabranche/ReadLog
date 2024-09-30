@@ -176,7 +176,7 @@
                                 Width="100">
                     <GridViewColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding isFavorite, Converter={StaticResource BoolToImageConverter}}"
+                            <Image Source="{Binding IsFavorite, Converter={StaticResource BoolToImageConverter}}"
                                    MaxHeight="20"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center" />

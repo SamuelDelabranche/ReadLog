@@ -32,7 +32,6 @@ namespace ReadLog.MVVM.Views
                 addMangaViewModel.resetUI();
             }
             this.Visibility = Visibility.Hidden;
-
         }
 
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
