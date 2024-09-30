@@ -68,6 +68,7 @@ namespace ReadLog.Services
                     };
                 };
             }
+
             return null;
         }
 
