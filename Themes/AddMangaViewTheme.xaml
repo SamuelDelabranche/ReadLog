@@ -37,6 +37,13 @@
                         </Grid>
 
                     </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor"
+                                    Value="IBeam" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -115,6 +122,14 @@
                                     Value="#646184" />
                             <Setter Property="Cursor"
                                     Value="Hand" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled"
+                                 Value="False">
+                            <Setter TargetName="ButtonTemplate"
+                                    Property="Background"
+                                    Value="#434058" />
+                            <Setter Property="Cursor"
+                                    Value="Wait" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

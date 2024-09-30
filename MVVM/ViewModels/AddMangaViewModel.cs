@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ReadLog.MVVM.ViewModels
 {
@@ -59,7 +60,12 @@ namespace ReadLog.MVVM.ViewModels
         }
         public AddMangaViewModel(INavigationService navigationService, DataStore<Manga> dataStore) : base(navigationService, dataStore)
         {
-            AddMangaCommand = new RelayCommand(async execute => await AddManga());
+            AddMangaCommand = new RelayCommand(async execute => await AddManga(), canExecute => checkBoxes());
+        }
+
+        private bool checkBoxes()
+        {
+            return !string.IsNullOrEmpty(_mangaName);
         }
 
         public void resetUI()
@@ -73,6 +79,7 @@ namespace ReadLog.MVVM.ViewModels
         {
             Manga newManga = new Manga { Name = _mangaName, IsFavorite = _isFavorite, NombreChapitreLus = _numberChapiter };
             await _datatStore.AddDataAsync(newManga);
+
         }
     }
 }

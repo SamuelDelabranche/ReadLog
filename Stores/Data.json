@@ -25,5 +25,32 @@
     "CoverArt_Path": "Not Found",
     "IsFavorite": false,
     "NombreChapitreLus": 0
+  },
+  {
+    "ID": "Not Found",
+    "Name": "zdz",
+    "Description": "Not Found",
+    "CoverArt_ID": "Not Found",
+    "CoverArt_Path": "Not Found",
+    "IsFavorite": false,
+    "NombreChapitreLus": 10
+  },
+  {
+    "ID": "Not Found",
+    "Name": "Test",
+    "Description": "Not Found",
+    "CoverArt_ID": "Not Found",
+    "CoverArt_Path": "Not Found",
+    "IsFavorite": true,
+    "NombreChapitreLus": 0
+  },
+  {
+    "ID": "Not Found",
+    "Name": "Bonjour",
+    "Description": "Not Found",
+    "CoverArt_ID": "Not Found",
+    "CoverArt_Path": "Not Found",
+    "IsFavorite": true,
+    "NombreChapitreLus": 10
   }
 ]

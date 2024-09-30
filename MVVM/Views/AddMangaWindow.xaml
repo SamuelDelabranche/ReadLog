@@ -10,7 +10,8 @@
         ResizeMode="NoResize"
         WindowStyle="None"
         Height="400"
-        Width="300">
+        Width="300"
+        KeyDown="Window_KeyDown">
     <Window.Resources>
         <Style TargetType="Label"
                BasedOn="{StaticResource MangaLabel}" />
@@ -74,17 +75,17 @@
 
                 <StackPanel>
                     <Label Content="Nom du manga" />
-                    <TextBox Text="{Binding MangaName}" />
+                    <TextBox Text="{Binding MangaName, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
 
                 <StackPanel Grid.Row="1">
                     <Label Content="Nombre de chapitres lus" />
-                    <TextBox Text="{Binding NumberChapiter}" PreviewTextInput="TextBox_PreviewTextInput" />
+                    <TextBox Text="{Binding NumberChapiter, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="TextBox_PreviewTextInput" />
                 </StackPanel>
 
                 <StackPanel Grid.Row="2">
                     <Label Content="Favoris" />
-                    <CheckBox IsChecked="{Binding IsFavorite}"/>
+                    <CheckBox IsChecked="{Binding IsFavorite, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
 
                 <Button Grid.Row="3"
