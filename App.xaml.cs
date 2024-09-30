@@ -1,10 +1,19 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using ReadLog.Core;
 using ReadLog.MVVM.Models;
 using ReadLog.MVVM.ViewModels;
 using ReadLog.MVVM.Views;
 using ReadLog.Services;
 using ReadLog.Stores;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.Design;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Automation.Peers;
 
 namespace ReadLog
 {
@@ -28,9 +37,6 @@ namespace ReadLog
             _services.AddSingleton<IViewModelFactory, ViewModelFactory>();
             _services.AddSingleton<IDataService<Manga>, DataService<Manga>>();
             _services.AddSingleton<IListViewFilterService, ListViewFilterService>();
-
-            _services.AddSingleton<IMangaApiClient, MangaApiClient>();
-
             _services.AddSingleton<IMangaApiClient, MangaApiClient>();
             _services.AddSingleton<DataStore<Manga>>();
 
