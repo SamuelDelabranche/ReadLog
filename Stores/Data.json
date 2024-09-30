@@ -1,11 +1,29 @@
-﻿[
+[
   {
     "ID": "32d76d19-8a05-4db0-9fc2-e0b0648fe9d0",
     "Name": "Solo Leveling",
-    "Description": "10 years ago, after \u201cthe Gate\u201d that connected the real world with the monster world opened, some of the ordinary, everyday people received the power to hunt monsters within the Gate. They are known as \u201cHunters\u201d. However, not all Hunters are powerful. My name is Sung Jin-Woo, an E-rank Hunter. I\u2019m someone who has to risk his life in the lowliest of dungeons, the \u201cWorld\u2019s Weakest\u201d. Having no skills whatsoever to display, I barely earned the required money by fighting in low-leveled dungeons\u2026 at least until I found a hidden dungeon with the hardest difficulty within the D-rank dungeons! In the end, as I was accepting death, I suddenly received a strange power, a quest log that only I could see, a secret to leveling up that only I know about! If I trained in accordance with my quests and hunted monsters, my level would rise. Changing from the weakest Hunter to the strongest S-rank Hunter!\n\n---\n**Links:**\n\n- Official English Translation [<Pocket Comics>](https://www.pocketcomics.com/comic/320) | [<WebNovel>](https://www.webnovel.com/comic/only-i-level-up-(solo-leveling)_15227640605485101) | [<Tapas>](https://tapas.io/series/solo-leveling-comic/info)\n- Alternate Official Raw - [Kakao Webtoon](https://webtoon.kakao.com/content/\ub098-\ud63c\uc790\ub9cc-\ub808\ubca8\uc5c5/2320)",
-    "CoverART_ID": "e6583e52-1125-4c50-8db4-e8d6cf3fb144",
-    "CoverArt_PATH": "MangaScrapper/ressources/icons/Solo Leveling.png",
-    "isFavorite": true,
-    "nombreChapitreLus": 20
+    "Description": "10 years ago, after \u201Cthe Gate\u201D that connected the real world with the monster world opened, some of the ordinary, everyday people received the power to hunt monsters within the Gate. They are known as \u201CHunters\u201D. However, not all Hunters are powerful. My name is Sung Jin-Woo, an E-rank Hunter. I\u2019m someone who has to risk his life in the lowliest of dungeons, the \u201CWorld\u2019s Weakest\u201D. Having no skills whatsoever to display, I barely earned the required money by fighting in low-leveled dungeons\u2026 at least until I found a hidden dungeon with the hardest difficulty within the D-rank dungeons! In the end, as I was accepting death, I suddenly received a strange power, a quest log that only I could see, a secret to leveling up that only I know about! If I trained in accordance with my quests and hunted monsters, my level would rise. Changing from the weakest Hunter to the strongest S-rank Hunter!\n\n---\n**Links:**\n\n- Official English Translation [\u003CPocket Comics\u003E](https://www.pocketcomics.com/comic/320) | [\u003CWebNovel\u003E](https://www.webnovel.com/comic/only-i-level-up-(solo-leveling)_15227640605485101) | [\u003CTapas\u003E](https://tapas.io/series/solo-leveling-comic/info)\n- Alternate Official Raw - [Kakao Webtoon](https://webtoon.kakao.com/content/\uB098-\uD63C\uC790\uB9CC-\uB808\uBCA8\uC5C5/2320)",
+    "CoverArt_ID": "e6583e52-1125-4c50-8db4-e8d6cf3fb144",
+    "CoverArt_Path": "MangaScrapper/ressources/icons/Solo Leveling.png",
+    "IsFavorite": true,
+    "NombreChapitreLus": 20
+  },
+  {
+    "ID": "Not Found",
+    "Name": "djizd",
+    "Description": "Not Found",
+    "CoverArt_ID": "Not Found",
+    "CoverArt_Path": "Not Found",
+    "IsFavorite": true,
+    "NombreChapitreLus": 0
+  },
+  {
+    "ID": "Not Found",
+    "Name": "BonjTay",
+    "Description": "Not Found",
+    "CoverArt_ID": "Not Found",
+    "CoverArt_Path": "Not Found",
+    "IsFavorite": false,
+    "NombreChapitreLus": 0
   }
 ]

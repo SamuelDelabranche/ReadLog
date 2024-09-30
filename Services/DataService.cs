@@ -8,23 +8,41 @@ using System.Text.Json;
 using System.IO;
 using System.Diagnostics;
 using ReadLog.MVVM.Models;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ReadLog.Services
 {
 
     public interface IDataService<TObject>
     {
-        Task<List<TObject>> LoadDataAsync(string filePath);
+        string filePath { get; set; }
+        Task<List<TObject>> LoadDataAsync();
+        Task AddDataAsync(TObject manga);
     }
     public class DataService<TObject> : Observable, IDataService<TObject>
     {
-        public async Task<List<TObject>> LoadDataAsync(string filePath)
+        public string filePath { get; set; }
+
+        public async Task AddDataAsync(TObject manga)
+        {
+            List<TObject> data = await LoadDataAsync();
+            if(!string.IsNullOrEmpty(filePath))
+            {
+                data.Add(manga);
+                var updatedJson = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true});
+                await File.WriteAllTextAsync(filePath, updatedJson);
+            }
+
+        }
+
+        public async Task<List<TObject>> LoadDataAsync()
         {
 
             if (!File.Exists(filePath))
             {
                 return new List<TObject>();
             }
+
 
             try
             {
@@ -52,5 +70,6 @@ namespace ReadLog.Services
                 return new List<TObject>();
             }
         }
+
     }
 }

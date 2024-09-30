@@ -29,7 +29,7 @@ namespace ReadLog.MVVM.ViewModels
         private readonly Window _addMangaWindow;
         public MangaViewModel(INavigationService navigationService, DataStore<Manga> dataStore, IListViewFilterService listViewFilterService, IServiceProvider serviceProvider) : base(navigationService, dataStore)
         {
-            InitData("../../../Stores/Data.json", dataStore);
+            InitData(dataStore);
 
             AddMangaCommand = new RelayCommand(execute => NavigateAddView());
 
@@ -42,6 +42,12 @@ namespace ReadLog.MVVM.ViewModels
 
             _listViewFilterService = listViewFilterService;
             _listViewFilterService.FilterTextChanged += OnFilterTextChanged;
+            _datatStore.itemAdded += OnItemAdded;
+        }
+
+        private void OnItemAdded(Manga newManga)
+        {
+            FilteredItems.Add(newManga);
         }
 
         private void OnFilterTextChanged(string obj)
@@ -68,9 +74,9 @@ namespace ReadLog.MVVM.ViewModels
             _addMangaWindow.ShowDialog();
         }
 
-        private async void InitData(string filePath, DataStore<Manga> dataStore)
+        private async void InitData(DataStore<Manga> dataStore)
         {
-            await dataStore.LoadDataAsync(filePath);
+            await dataStore.LoadDataAsync();
             Items = dataStore.Items;
             FilteredItems = new ObservableCollection<Manga>(Items);
 

@@ -56,6 +56,7 @@ namespace ReadLog
         {
 
             _serviceProvider.GetRequiredService<MainWindow>().Show();
+            _serviceProvider.GetRequiredService<IDataService<Manga>>().filePath = "../../../Stores/Data.json";
             base.OnStartup(e);
         }
     }

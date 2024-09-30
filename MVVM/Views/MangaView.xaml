@@ -135,7 +135,7 @@
     </UserControl.Resources>
 
 
-    <ListView ItemsSource="{Binding FilteredItems}"
+    <ListView ItemsSource="{Binding FilteredItems, UpdateSourceTrigger=PropertyChanged}"
               Background="#3a384d"
               ScrollViewer.HorizontalScrollBarVisibility="Disabled"
               HorizontalAlignment="Stretch"

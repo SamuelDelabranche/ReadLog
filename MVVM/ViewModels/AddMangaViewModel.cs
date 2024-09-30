@@ -14,6 +14,8 @@ namespace ReadLog.MVVM.ViewModels
     public class AddMangaViewModel : ViewModelBase
     {
 
+        public RelayCommand AddMangaCommand { get; set; }
+
         private string _mangaName;
         public string MangaName
         {
@@ -57,6 +59,7 @@ namespace ReadLog.MVVM.ViewModels
         }
         public AddMangaViewModel(INavigationService navigationService, DataStore<Manga> dataStore) : base(navigationService, dataStore)
         {
+            AddMangaCommand = new RelayCommand(async execute => await AddManga());
         }
 
         public void resetUI()
@@ -64,6 +67,12 @@ namespace ReadLog.MVVM.ViewModels
             IsFavorite = false;
             MangaName = "";
             NumberChapiter = 0;
+        }
+
+        private async Task AddManga()
+        {
+            Manga newManga = new Manga { Name = _mangaName, IsFavorite = _isFavorite, NombreChapitreLus = _numberChapiter };
+            await _datatStore.AddDataAsync(newManga);
         }
     }
 }

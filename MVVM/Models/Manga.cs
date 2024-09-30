@@ -24,5 +24,24 @@ namespace ReadLog.MVVM.Models
         public string CoverArt_Path { get => _coverART_PATH; set => _coverART_PATH = value; }
         public bool IsFavorite { get => _isFavorite; set => _isFavorite = value; }
         public int NombreChapitreLus { get => _nombreChapitreLus; set => _nombreChapitreLus = value; }
+
+        public static bool operator ==(Manga m1, Manga m2)
+        {
+            if (ReferenceEquals(m1, m2)) return true;
+            if (m1 is null || m2 is null) return false;
+            return m1.Name.ToLowerInvariant() == m2.Name.ToLowerInvariant() && m1.ID == m2.ID;
+        }
+
+        public static bool operator !=(Manga m1, Manga m2) => !(m1 == m2);
+
+        public override bool Equals(object obj)
+        {
+            return obj is Manga manga && this == manga;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Name, ID);
+        }
     }
 }
