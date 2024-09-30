@@ -52,5 +52,13 @@ namespace ReadLog.MVVM.Views
             }
         }
 
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape && DataContext is AddMangaViewModel addMangaViewModel)
+            {
+                this.Visibility = Visibility.Hidden;
+                addMangaViewModel.resetUI();
+            }
+        }
     }
 }
