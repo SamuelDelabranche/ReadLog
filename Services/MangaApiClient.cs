@@ -1,22 +1,10 @@
-<<<<<<< HEAD
-﻿using ReadLog.MVVM.Models;
+using ReadLog.MVVM.Models;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Text.Json;
-=======
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Text;
->>>>>>> origin/master
 using System.Threading.Tasks;
 
 namespace ReadLog.Services
@@ -24,20 +12,15 @@ namespace ReadLog.Services
     public interface IMangaApiClient
     {
         Task<HttpStatusCode> GetAPICode();
-<<<<<<< HEAD
         Task<Manga> GetMangaByName(string mangaName);
         Task<bool> GetAPIStatus();
         Task<bool> isMangaExist(string mangaName);
-=======
-        Task<bool> GetAPIStatus();
->>>>>>> origin/master
     }
     public class MangaApiClient : IMangaApiClient
     {
         private readonly HttpClient _httpClient;
         private readonly List<string> _api = new List<string> { "https://api.mangadex.org/manga" };
 
-<<<<<<< HEAD
         public MangaApiClient()
         {
             _httpClient = new HttpClient();
@@ -45,13 +28,11 @@ namespace ReadLog.Services
         }
 
 
-=======
         public MangaApiClient(HttpClient httpClient)
         {
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         }
 
->>>>>>> origin/master
         public async Task<HttpStatusCode> GetAPICode()
         {
             var response = await _httpClient.GetAsync(_api[0]);
@@ -63,7 +44,6 @@ namespace ReadLog.Services
             HttpStatusCode statusCode = await GetAPICode();
             return (statusCode == HttpStatusCode.OK);
         }
-<<<<<<< HEAD
         public async Task<Manga> GetMangaByName(string mangaName)
         {
             if (string.IsNullOrEmpty(mangaName) || !await isMangaExist(mangaName))
@@ -108,7 +88,5 @@ namespace ReadLog.Services
             }
             return false;
         }
-=======
->>>>>>> origin/master
     }
 }
