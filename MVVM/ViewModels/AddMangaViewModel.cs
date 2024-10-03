@@ -4,6 +4,7 @@ using ReadLog.Services;
 using ReadLog.Stores;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -58,8 +59,11 @@ namespace ReadLog.MVVM.ViewModels
                 OnPropertyChanged(nameof(IsFavorite));
             }
         }
-        public AddMangaViewModel(INavigationService navigationService, DataStore<Manga> dataStore) : base(navigationService, dataStore)
+
+        private readonly IMangaApiClient _mangaApiClient;
+        public AddMangaViewModel(INavigationService navigationService, DataStore<Manga> dataStore, IMangaApiClient mangaApiClient) : base(navigationService, dataStore)
         {
+            _mangaApiClient = mangaApiClient; 
             AddMangaCommand = new RelayCommand(async execute => await AddManga(), canExecute => checkBoxes());
         }
 
@@ -77,8 +81,13 @@ namespace ReadLog.MVVM.ViewModels
 
         private async Task AddManga()
         {
-            Manga newManga = new Manga { Name = _mangaName, IsFavorite = _isFavorite, NombreChapitreLus = _numberChapiter };
-            await _datatStore.AddDataAsync(newManga);
+            Manga newManga = await _mangaApiClient.GetMangaByName(_mangaName);
+            if (newManga != null)
+            {
+                Debug.WriteLine(newManga.ToString()); 
+            }
+            //Manga newManga = new Manga { Name = _mangaName, IsFavorite = _isFavorite, NombreChapitreLus = _numberChapiter };
+            //await _datatStore.AddDataAsync(newManga);
 
         }
     }

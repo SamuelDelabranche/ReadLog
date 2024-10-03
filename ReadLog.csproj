@@ -24,4 +24,7 @@
     <Resource Include="Assets\Images\unlike.png" />
     <Resource Include="Stores\Data.json" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Stores\covertArt\" />
+  </ItemGroup>
 </Project>
