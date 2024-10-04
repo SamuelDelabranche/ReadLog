@@ -1,56 +1,12 @@
 [
   {
-    "ID": "32d76d19-8a05-4db0-9fc2-e0b0648fe9d0",
-    "Name": "Solo Leveling",
-    "Description": "10 years ago, after \u201Cthe Gate\u201D that connected the real world with the monster world opened, some of the ordinary, everyday people received the power to hunt monsters within the Gate. They are known as \u201CHunters\u201D. However, not all Hunters are powerful. My name is Sung Jin-Woo, an E-rank Hunter. I\u2019m someone who has to risk his life in the lowliest of dungeons, the \u201CWorld\u2019s Weakest\u201D. Having no skills whatsoever to display, I barely earned the required money by fighting in low-leveled dungeons\u2026 at least until I found a hidden dungeon with the hardest difficulty within the D-rank dungeons! In the end, as I was accepting death, I suddenly received a strange power, a quest log that only I could see, a secret to leveling up that only I know about! If I trained in accordance with my quests and hunted monsters, my level would rise. Changing from the weakest Hunter to the strongest S-rank Hunter!\n\n---\n**Links:**\n\n- Official English Translation [\u003CPocket Comics\u003E](https://www.pocketcomics.com/comic/320) | [\u003CWebNovel\u003E](https://www.webnovel.com/comic/only-i-level-up-(solo-leveling)_15227640605485101) | [\u003CTapas\u003E](https://tapas.io/series/solo-leveling-comic/info)\n- Alternate Official Raw - [Kakao Webtoon](https://webtoon.kakao.com/content/\uB098-\uD63C\uC790\uB9CC-\uB808\uBCA8\uC5C5/2320)",
-    "CoverArt_ID": "e6583e52-1125-4c50-8db4-e8d6cf3fb144",
-    "CoverArt_Path": "MangaScrapper/ressources/icons/Solo Leveling.png",
-    "IsFavorite": true,
-    "NombreChapitreLus": 20
-  },
-  {
-    "ID": "Not Found",
-    "Name": "djizd",
-    "Description": "Not Found",
-    "CoverArt_ID": "Not Found",
-    "CoverArt_Path": "Not Found",
-    "IsFavorite": true,
-    "NombreChapitreLus": 0
-  },
-  {
-    "ID": "Not Found",
-    "Name": "BonjTay",
-    "Description": "Not Found",
-    "CoverArt_ID": "Not Found",
-    "CoverArt_Path": "Not Found",
+    "ID": "6b1eb93e-473a-4ab3-9922-1a66d2a29a4a",
+    "Name": "Naruto",
+    "Description": "Naruto est un gar\u00E7on un peu sp\u00E9cial. Il est toujours tout seul et son caract\u00E8re fougueux ne l\u0027aide pas vraiment \u00E0 se faire appr\u00E9cier dans son village. Malgr\u00E9 cela, il garde au fond de lui une ambition: celle de devenir un ma\u00EEtre Hokage, la plus haute distinction dans l\u0027ordre des ninjas, et ainsi obtenir la reconnaissance de ses pairs.",
+    "CoverArt_ID": "27c71f39-2cba-4fdd-9ec5-d6b6b0468f36",
+    "CoverArt_Path": "Image saved successfully: ../../../Stores/covertArt/bb223226-a5ca-457b-8a10-ad3ecaea66be.jpg",
     "IsFavorite": false,
-    "NombreChapitreLus": 0
-  },
-  {
-    "ID": "Not Found",
-    "Name": "zdz",
-    "Description": "Not Found",
-    "CoverArt_ID": "Not Found",
-    "CoverArt_Path": "Not Found",
-    "IsFavorite": false,
-    "NombreChapitreLus": 10
-  },
-  {
-    "ID": "Not Found",
-    "Name": "Test",
-    "Description": "Not Found",
-    "CoverArt_ID": "Not Found",
-    "CoverArt_Path": "Not Found",
-    "IsFavorite": true,
-    "NombreChapitreLus": 0
-  },
-  {
-    "ID": "Not Found",
-    "Name": "Bonjour",
-    "Description": "Not Found",
-    "CoverArt_ID": "Not Found",
-    "CoverArt_Path": "Not Found",
-    "IsFavorite": true,
-    "NombreChapitreLus": 10
+    "NombreChapitreLus": 0,
+    "NombreChapitreTotaux": "700"
   }
 ]

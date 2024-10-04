@@ -63,7 +63,7 @@ namespace ReadLog.MVVM.ViewModels
         private readonly IMangaApiClient _mangaApiClient;
         public AddMangaViewModel(INavigationService navigationService, DataStore<Manga> dataStore, IMangaApiClient mangaApiClient) : base(navigationService, dataStore)
         {
-            _mangaApiClient = mangaApiClient; 
+            _mangaApiClient = mangaApiClient;
             AddMangaCommand = new RelayCommand(async execute => await AddManga(), canExecute => checkBoxes());
         }
 
@@ -84,10 +84,10 @@ namespace ReadLog.MVVM.ViewModels
             Manga newManga = await _mangaApiClient.GetMangaByName(_mangaName);
             if (newManga != null)
             {
-                Debug.WriteLine(newManga.ToString()); 
+                Debug.WriteLine(newManga.ToString());
+                await _datatStore.AddDataAsync(newManga);
+
             }
-            //Manga newManga = new Manga { Name = _mangaName, IsFavorite = _isFavorite, NombreChapitreLus = _numberChapiter };
-            //await _datatStore.AddDataAsync(newManga);
 
         }
     }

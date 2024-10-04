@@ -54,8 +54,6 @@ namespace ReadLog.Stores
                 await _dataService.AddDataAsync(manga);
             }
 
-
-
         }
     }
 }

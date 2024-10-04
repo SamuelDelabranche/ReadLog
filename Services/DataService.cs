@@ -61,7 +61,7 @@ namespace ReadLog.Services
             }
             catch (JsonException ex)
             {
-                Debug.WriteLine("ERROR ", ex.Message);
+                Debug.WriteLine("JSON_ERROR ", ex.Message);
                 return new List<TObject>();
             }
             catch (Exception ex)
