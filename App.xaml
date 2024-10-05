@@ -24,6 +24,9 @@
                 <views:SettingsView />
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewModel:MangaEditionViewModel}">
+                <views:MangaEditionView />
+            </DataTemplate>
 
         </ResourceDictionary>
     </Application.Resources>

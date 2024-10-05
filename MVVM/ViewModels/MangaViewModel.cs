@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using ReadLog.MVVM.Views;
 using System.Windows;
+using System.Diagnostics;
 
 namespace ReadLog.MVVM.ViewModels
 {
@@ -18,6 +19,7 @@ namespace ReadLog.MVVM.ViewModels
     {
 
         public RelayCommand AddMangaCommand { get; }
+        public RelayCommand EditionMangaCommand { get; set; }
 
         private string _filterText;
         private ObservableCollection<Manga> Items;
@@ -32,6 +34,7 @@ namespace ReadLog.MVVM.ViewModels
             InitData(dataStore);
 
             AddMangaCommand = new RelayCommand(execute => NavigateAddView());
+            EditionMangaCommand = new RelayCommand(execute => OnItemDoubleClick((Manga)execute));
 
             _serviceProvider = serviceProvider;
 
@@ -43,6 +46,14 @@ namespace ReadLog.MVVM.ViewModels
             _listViewFilterService = listViewFilterService;
             _listViewFilterService.FilterTextChanged += OnFilterTextChanged;
             _datatStore.itemAdded += OnItemAdded;
+        }
+
+        private void OnItemDoubleClick(Manga selectedItem)
+        {
+            if (selectedItem != null)
+            {
+                
+            }
         }
 
         private void OnItemAdded(Manga newManga)

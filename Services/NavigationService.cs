@@ -12,6 +12,7 @@ namespace ReadLog.Services
     {
         public ViewModelBase CurrentView { get; }
         void NavigateTo<TViewModel>() where TViewModel : ViewModelBase;
+        void NavigateTo<TViewModel>(object parameter = null) where TViewModel : ViewModelBase;
 
     }
 
@@ -36,6 +37,16 @@ namespace ReadLog.Services
         public void NavigateTo<TViewModel>() where TViewModel : ViewModelBase
         {
             CurrentView = _viewModelFactory.CreateViewModel(typeof(TViewModel));
+        }
+
+        public void NavigateTo<TViewModel>(object parameter = null) where TViewModel : ViewModelBase
+        {
+            var viewModel = _viewModelFactory.CreateViewModel(typeof(TViewModel));
+            if (viewModel is IParameterNavigationService parameterNavigationService)
+            {
+                parameterNavigationService.ReceiverParameter(parameter);
+            }
+            CurrentView = viewModel;
         }
     }
 }

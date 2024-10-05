@@ -17,7 +17,7 @@ namespace ReadLog.Core
 
         private readonly Func<object, bool> _canExecute;
         private readonly Action<object> _execute;
-
+        
         public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)
         {
             _canExecute = canExecute;

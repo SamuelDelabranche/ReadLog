@@ -1,5 +1,8 @@
-﻿using System;
+﻿using ReadLog.MVVM.Models;
+using ReadLog.MVVM.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +26,18 @@ namespace ReadLog.MVVM.Views
         public MangaView()
         {
             InitializeComponent();
+        }
+
+        private void DataListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is ListView listView && listView.SelectedItem is Manga selectedManga)
+            {
+                var viewModel = DataContext as MangaViewModel;
+                if (viewModel?.EditionMangaCommand != null)
+                {
+                    viewModel.EditionMangaCommand.Execute(selectedManga);
+                }
+            }
         }
     }
 }

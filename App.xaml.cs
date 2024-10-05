@@ -32,6 +32,7 @@ namespace ReadLog
             _services.AddSingleton<HomeViewModel>();
             _services.AddSingleton<MangaViewModel>();
             _services.AddSingleton<SettingsViewModel>();
+            _services.AddSingleton<MangaEditionViewModel>();
 
             _services.AddSingleton<INavigationService,  NavigationService>();
             _services.AddSingleton<IViewModelFactory, ViewModelFactory>();
