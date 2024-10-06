@@ -52,7 +52,7 @@ namespace ReadLog.MVVM.ViewModels
         {
             if (selectedItem != null)
             {
-                
+                _navigationService.NavigateTo<MangaEditionViewModel>(selectedItem);
             }
         }
 
