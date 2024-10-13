@@ -24,5 +24,14 @@ namespace ReadLog.MVVM.Views
         {
             InitializeComponent();
         }
+        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !isText(e.Text);
+        }
+
+        private bool isText(string text)
+        {
+            return (int.TryParse(text, out _));
+        }
     }
 }

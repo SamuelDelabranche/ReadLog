@@ -84,6 +84,9 @@ namespace ReadLog.MVVM.ViewModels
             Manga newManga = await _mangaApiClient.GetMangaByName(_mangaName);
             if (newManga != null)
             {
+                newManga.IsFavorite = IsFavorite;
+                newManga.NombreChapitreLus = NumberChapiter;
+                
                 Debug.WriteLine(newManga.ToString());
                 await _datatStore.AddDataAsync(newManga);
 

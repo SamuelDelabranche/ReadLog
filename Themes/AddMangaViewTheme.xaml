@@ -60,12 +60,12 @@
                 <ControlTemplate TargetType="{x:Type CheckBox}">
                     <Grid>
                         <Ellipse x:Name="BaseEllipse"
-                                 Fill="Gray" />
+                                 Fill="#8781af" />
 
                         <Ellipse x:Name="CheckedEllipse"
-                                 Fill="DarkGray"
+                                 Fill="#413f54"
                                  Opacity="0"
-                                 Margin="2.5" />
+                                 Margin="3" />
                     </Grid>
 
                     <ControlTemplate.Triggers>

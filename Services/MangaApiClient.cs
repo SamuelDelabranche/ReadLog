@@ -162,7 +162,7 @@ namespace ReadLog.Services
                     string filePath = Path.Combine("../../../Stores/covertArt/", coverFileName);
                     await File.WriteAllBytesAsync(filePath, imageBytes);
 
-                    return $"Image saved successfully: {filePath}";
+                    return filePath;
                 }
                 catch (HttpRequestException ex)
                 {
@@ -178,16 +178,23 @@ namespace ReadLog.Services
 
         public async Task<bool> isMangaExist(string mangaName)
         {
-            var reponse = await _httpClient.GetAsync($"{_api[1]}?title={Uri.EscapeDataString(mangaName)}");
-
-            var jsonResponse = await reponse.Content.ReadAsStringAsync();
-            var mangaData = JsonDocument.Parse(jsonResponse).RootElement.GetProperty("data");
-
-            foreach (var manga in mangaData.EnumerateArray())
+            try
             {
-                if (manga.GetProperty("attributes").GetProperty("title").GetProperty("en").GetString().ToLower() == mangaName.ToLower()) return true;
+                var reponse = await _httpClient.GetAsync($"{_api[1]}?title={Uri.EscapeDataString(mangaName)}");
+
+                var jsonResponse = await reponse.Content.ReadAsStringAsync();
+                var mangaData = JsonDocument.Parse(jsonResponse).RootElement.GetProperty("data");
+
+                foreach (var manga in mangaData.EnumerateArray())
+                {
+                    if (manga.GetProperty("attributes").GetProperty("title").GetProperty("en").GetString().ToLower() == mangaName.ToLower()) return true;
+                }
+                return false;
             }
-            return false;
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }
