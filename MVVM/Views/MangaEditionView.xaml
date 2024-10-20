@@ -65,7 +65,7 @@
 
 
                     <Grid>
-                        <TextBox Text="{Binding Item.NombreChapitreLus, UpdateSourceTrigger=PropertyChanged}"
+                        <TextBox Text="{Binding Item.NombreChapitresLus, UpdateSourceTrigger=PropertyChanged}"
                                  PreviewTextInput="TextBox_PreviewTextInput" Margin="10 0 10 0"/>
                     </Grid>
                     <Grid Grid.Column="1">

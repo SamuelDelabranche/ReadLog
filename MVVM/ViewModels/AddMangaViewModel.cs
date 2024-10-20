@@ -32,8 +32,8 @@ namespace ReadLog.MVVM.ViewModels
             }
         }
 
-        private int _numberChapiter;
-        public int NumberChapiter
+        private string _numberChapiter;
+        public string NumberChapiter
         {
             get
             {
@@ -76,7 +76,7 @@ namespace ReadLog.MVVM.ViewModels
         {
             IsFavorite = false;
             MangaName = "";
-            NumberChapiter = 0;
+            NumberChapiter = "0";
         }
 
         private async Task AddManga()
@@ -85,7 +85,7 @@ namespace ReadLog.MVVM.ViewModels
             if (newManga != null)
             {
                 newManga.IsFavorite = IsFavorite;
-                newManga.NombreChapitreLus = NumberChapiter;
+                newManga.NombreChapitresLus = NumberChapiter;
                 
                 Debug.WriteLine(newManga.ToString());
                 await _datatStore.AddDataAsync(newManga);
@@ -93,5 +93,6 @@ namespace ReadLog.MVVM.ViewModels
             }
 
         }
+
     }
 }

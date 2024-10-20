@@ -7,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace ReadLog.Stores
 {
@@ -68,6 +69,16 @@ namespace ReadLog.Stores
                 await _dataService.AddDataAsync(manga);
             }
 
+        }
+
+        public async Task<ImageSource> LoadImageAsync(TObject manga)
+        {
+            if (Items.Contains(manga))
+            {
+                return await _dataService.LoadImageAsync(manga);
+            }
+
+            return null;
         }
     }
 }

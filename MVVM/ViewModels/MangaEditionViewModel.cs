@@ -57,7 +57,7 @@ namespace ReadLog.MVVM.ViewModels
             {
                 _item = value;
                 OnPropertyChanged(nameof(Item));
-                LoadImage();
+                _ = LoadImageAsync();
             }
         }
 
@@ -90,27 +90,12 @@ namespace ReadLog.MVVM.ViewModels
             }
         }
 
-        private void LoadImage()
+        private async Task LoadImageAsync()
         {
-            if (!string.IsNullOrEmpty(Item.CoverArt_Path))
+            var imageSource = await _dataStore.LoadImageAsync(Item);
+            if (imageSource != null)
             {
-                try
-                {
-                    BitmapImage bitmap = new BitmapImage();
-                    bitmap.BeginInit();
-                    bitmap.UriSource = new Uri(Item.CoverArt_Path, UriKind.RelativeOrAbsolute);
-                    bitmap.CacheOption = BitmapCacheOption.OnLoad;
-                    bitmap.EndInit();
-                    bitmap.Freeze(); 
-                    ImageManga = bitmap;
-                    Debug.WriteLine("Image Chargée");
-                }
-                catch (Exception ex) { Debug.WriteLine($"Erreur chargement image manga : {ex.Message}"); }
-
-            }
-            else
-            {
-                Debug.WriteLine($"Image non chargée...");
+                ImageManga = imageSource;
             }
         }
 
@@ -123,5 +108,6 @@ namespace ReadLog.MVVM.ViewModels
                 Favorite = Item.IsFavorite;
             }
         }
+        public void Close() => _navigationService.NavigateTo<MangaViewModel>();
     }
 }

@@ -185,6 +185,16 @@
                     </GridViewColumn.CellTemplate>
                 </GridViewColumn>
 
+                <GridViewColumn Header="Chapitre(s)"
+                                Width="100">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding NombreChapitresLus}"
+                                       Style="{StaticResource CenteredTextBlock}" />
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+
                 <GridViewColumn Header="Nom du manga"
                                 Width="250">
                     <GridViewColumn.CellTemplate>
@@ -196,7 +206,7 @@
                 </GridViewColumn>
 
                 <GridViewColumn Header="Description"
-                                Width="500">
+                                Width="400">
                     <GridViewColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Description}"

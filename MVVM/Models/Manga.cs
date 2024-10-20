@@ -15,7 +15,7 @@ namespace ReadLog.MVVM.Models
         private string _coverART_ID = "Not Found";
         private string _coverART_PATH = "Not Found";
         private bool _isFavorite = false;
-        private int _nombreChapitreLus = 0;
+        private string _nombreChapitresLus = "0";
         private string _nombreChapitreTotaux = "0";
 
 
@@ -25,7 +25,7 @@ namespace ReadLog.MVVM.Models
         public string CoverArt_ID { get => _coverART_ID; set => _coverART_ID = value; }
         public string CoverArt_Path { get => _coverART_PATH; set => _coverART_PATH = value; }
         public bool IsFavorite { get => _isFavorite; set => _isFavorite = value; }
-        public int NombreChapitreLus { get => _nombreChapitreLus; set => _nombreChapitreLus = value; }
+        public string NombreChapitresLus { get => _nombreChapitresLus; set => _nombreChapitresLus = value; }
         public string NombreChapitreTotaux { get => _nombreChapitreTotaux; set => _nombreChapitreTotaux = value; }
 
         public static bool operator ==(Manga m1, Manga m2)
