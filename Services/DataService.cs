@@ -18,6 +18,7 @@ namespace ReadLog.Services
         string filePath { get; set; }
         Task<List<TObject>> LoadDataAsync();
         Task AddDataAsync(TObject manga);
+        Task UpdateMangaAsync(TObject manga);
     }
     public class DataService<TObject> : Observable, IDataService<TObject>
     {
@@ -26,10 +27,10 @@ namespace ReadLog.Services
         public async Task AddDataAsync(TObject manga)
         {
             List<TObject> data = await LoadDataAsync();
-            if(!string.IsNullOrEmpty(filePath))
+            if (!string.IsNullOrEmpty(filePath))
             {
                 data.Add(manga);
-                var updatedJson = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true});
+                var updatedJson = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });
                 await File.WriteAllTextAsync(filePath, updatedJson);
             }
 
@@ -71,5 +72,22 @@ namespace ReadLog.Services
             }
         }
 
+        public async Task UpdateMangaAsync(TObject manga)
+        {
+            try
+            {
+                List<TObject> result = await LoadDataAsync();
+                foreach (var item in result)
+                {
+                    if (item is Manga storedManga && manga is Manga selectedManga && storedManga.Name == selectedManga.Name)
+                    {
+                        storedManga.IsFavorite = selectedManga.IsFavorite;
+                    }
+                }
+                var updatedJson = JsonSerializer.Serialize(result, new JsonSerializerOptions { WriteIndented = true });
+                await File.WriteAllTextAsync(filePath, updatedJson);
+            }
+            catch (JsonException ex) { Debug.WriteLine("JSON_ERROR ", ex.Message); }
+        }
     }
 }

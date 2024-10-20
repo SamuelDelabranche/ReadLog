@@ -1,5 +1,6 @@
 ﻿using ReadLog.Core;
 using ReadLog.MVVM.Models;
+using ReadLog.MVVM.Views;
 using ReadLog.Services;
 using ReadLog.Stores;
 using System;
@@ -15,10 +16,21 @@ namespace ReadLog.MVVM.ViewModels
 {
     public class MangaEditionViewModel : ViewModelBase, IParameterNavigationService
     {
+
+        private readonly DataStore<Manga> _dataStore;
         public MangaEditionViewModel(INavigationService navigationService, DataStore<Manga> dataStore) : base(navigationService, dataStore)
         {
-
+            _dataStore = dataStore;
+            ValidationCommand = new RelayCommand(execute => updateInformations());
         }
+
+        private async void updateInformations()
+        {
+            await _dataStore.UpdateMangaAsync(Item);
+            _navigationService.NavigateTo<MangaViewModel>();
+        }
+
+        public RelayCommand ValidationCommand { get; set; }
 
         private ImageSource _imageManga;
         public ImageSource ImageManga
@@ -73,6 +85,7 @@ namespace ReadLog.MVVM.ViewModels
             set
             {
                 _isFavorite = value;
+                Item.IsFavorite = _isFavorite;
                 OnPropertyChanged(nameof(Favorite));
             }
         }

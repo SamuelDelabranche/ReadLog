@@ -24,6 +24,20 @@ namespace ReadLog.Stores
 
         }
 
+        public async Task UpdateMangaAsync(TObject manga)
+        {
+            if (manga is Manga selectedManga)
+            {
+                foreach (var item  in Items)
+                {
+                    if (item is Manga mangaStored && mangaStored.Name == selectedManga.Name)
+                    {
+                        mangaStored.IsFavorite = selectedManga.IsFavorite;
+                    }
+                }
+            await _dataService.UpdateMangaAsync(manga);
+            }
+        }
         public async Task LoadDataAsync()
         {
             var items = await _dataService.LoadDataAsync();

@@ -93,7 +93,7 @@ namespace ReadLog.Services
                                                     : "Not found",
                             CoverArt_ID = covertArtId,
                             CoverArt_Path = await getCoverArtAsync(manga.TryGetProperty("id", out var IDProperty2) ? IDProperty2.GetString() : "Not found", covertArtId),
-                            NombreChapitreTotaux = manga.GetProperty("attributes").TryGetProperty("lastChapter", out var lastChapterProperty) ? lastChapterProperty.GetString() : "-1"
+                            NombreChapitreTotaux = manga.GetProperty("attributes").TryGetProperty("lastChapter", out var lastChapterProperty) ? string.IsNullOrEmpty(lastChapterProperty.GetString()) ? "Not found" : lastChapterProperty.GetString() : "Not found"
                         };
                     }
                     catch (Exception ex)
