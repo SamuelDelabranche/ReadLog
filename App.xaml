@@ -1,15 +1,17 @@
-﻿<Application x:Class="ReadLog.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:viewModel="clr-namespace:ReadLog.MVVM.ViewModels"
-             xmlns:local="clr-namespace:ReadLog"
-             xmlns:views="clr-namespace:ReadLog.MVVM.Views">
+﻿<Application
+    x:Class="ReadLog.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:ReadLog"
+    xmlns:viewModel="clr-namespace:ReadLog.MVVM.ViewModels"
+    xmlns:views="clr-namespace:ReadLog.MVVM.Views">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/navBar.xaml" />
                 <ResourceDictionary Source="Themes/menuBar.xaml" />
                 <ResourceDictionary Source="Themes/AddMangaViewTheme.xaml" />
+                <ResourceDictionary Source="Themes/MessageTheme.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">

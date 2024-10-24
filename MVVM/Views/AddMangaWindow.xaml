@@ -1,31 +1,31 @@
-﻿<Window x:Class="ReadLog.MVVM.Views.AddMangaWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ReadLog.MVVM.Views"
-        mc:Ignorable="d"
-        WindowStartupLocation="CenterOwner"
-        Title="Ajouter votre Manga"
-        ResizeMode="NoResize"
-        WindowStyle="None"
-        Height="400"
-        Width="300"
-        KeyDown="Window_KeyDown">
+﻿<Window
+    x:Class="ReadLog.MVVM.Views.AddMangaWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:ReadLog.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ReadLog.MVVM.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Ajouter votre Manga"
+    Width="300"
+    Height="400"
+    KeyDown="Window_KeyDown"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterOwner"
+    WindowStyle="None"
+    mc:Ignorable="d">
     <Window.Resources>
-        <Style TargetType="Label"
-               BasedOn="{StaticResource MangaLabel}" />
-        <Style TargetType="TextBox"
-               BasedOn="{StaticResource MangaTextBox}" />
-        <Style TargetType="CheckBox"
-               BasedOn="{StaticResource MangaCheckBox}" />
-        <Style TargetType="Button"
-               BasedOn="{StaticResource MangaButton}" />    
+        <Style BasedOn="{StaticResource MangaLabel}" TargetType="Label" />
+        <Style BasedOn="{StaticResource MangaTextBox}" TargetType="TextBox" />
+        <Style BasedOn="{StaticResource MangaCheckBox}" TargetType="CheckBox" />
+        <Style BasedOn="{StaticResource MangaButton}" TargetType="Button" />
+
+
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Window.Resources>
 
-    
-    <Border BorderBrush="White"
-            BorderThickness="0.5">
+
+    <Border BorderBrush="White" BorderThickness="0.5">
         <Grid Background="#272537">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50" />
@@ -40,23 +40,26 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <Border Grid.ColumnSpan="2"
-                        BorderBrush="White"
-                        BorderThickness="0 0 0 0.5">
+                <Border
+                    Grid.ColumnSpan="2"
+                    BorderBrush="White"
+                    BorderThickness="0,0,0,0.5">
                     <Grid MouseDown="Border_MouseDown">
-                        <TextBlock Text="Ajout Manga"
-                                   Foreground="White"
-                                   VerticalAlignment="Center"
-                                   Margin="20 0 0 0 "
-                                   FontSize="18"
-                                   FontFamily="/Assets/Fonts/#Poppins" />
+                        <TextBlock
+                            Margin="20,0,0,0"
+                            VerticalAlignment="Center"
+                            FontFamily="/Assets/Fonts/#Poppins"
+                            FontSize="18"
+                            Foreground="White"
+                            Text="Ajout Manga" />
 
-                        <Button Grid.Column="1"
-                                Click="Button_Click"
-                                Style="{StaticResource TopButton}"
-                                Content="X"
-                                HorizontalAlignment="Right"
-                                Margin="0 0 20 0" />
+                        <Button
+                            Grid.Column="1"
+                            Margin="0,0,20,0"
+                            HorizontalAlignment="Right"
+                            Click="Button_Click"
+                            Content="X"
+                            Style="{StaticResource TopButton}" />
                     </Grid>
 
                 </Border>
@@ -65,32 +68,52 @@
 
             </Grid>
 
-            <Grid Grid.Row="1" Margin="25">
+            <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
+                <TextBlock
+                    Grid.Row="1"
+                    DataContext="{Binding ErrorMessage}"
+                    Style="{StaticResource ErrorMessage}"
+                    Text="{Binding Content}"
+                    Visibility="{Binding HasMessage, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <TextBlock
+                    Grid.Row="1"
+                    DataContext="{Binding SuccessMessage}"
+                    Style="{StaticResource SuccessMessage}"
+                    Text="{Binding Content}"
+                    Visibility="{Binding HasMessage, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
-                <StackPanel>
-                    <Label Content="Nom du manga" />
-                    <TextBox Text="{Binding MangaName, UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
+                <Grid Margin="25">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
 
-                <StackPanel Grid.Row="1">
-                    <Label Content="Nombre de chapitres lus" />
-                    <TextBox Text="{Binding NumberChapiter, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="TextBox_PreviewTextInput" />
-                </StackPanel>
+                    <StackPanel>
+                        <Label Content="Nom du manga" />
+                        <TextBox Text="{Binding MangaName, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
 
-                <StackPanel Grid.Row="2">
-                    <Label Content="Favoris" />
-                    <CheckBox IsChecked="{Binding IsFavorite, UpdateSourceTrigger=PropertyChanged}"/>
-                </StackPanel>
+                    <StackPanel Grid.Row="1">
+                        <Label Content="Nombre de chapitres lus" />
+                        <TextBox PreviewTextInput="TextBox_PreviewTextInput" Text="{Binding NumberChapiter, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
 
-                <Button Grid.Row="3"
-                        Content="Ajouter"
-                        Command="{Binding AddMangaCommand}"/>
+                    <StackPanel Grid.Row="2">
+                        <Label Content="Favoris" />
+                        <CheckBox IsChecked="{Binding IsFavorite, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+
+                    <Button
+                        Grid.Row="3"
+                        Command="{Binding AddMangaCommand}"
+                        Content="Ajouter" />
+                </Grid>
             </Grid>
 
         </Grid>

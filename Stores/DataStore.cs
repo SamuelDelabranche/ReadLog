@@ -1,4 +1,5 @@
-﻿using ReadLog.MVVM.Models;
+﻿using ReadLog.Core;
+using ReadLog.MVVM.Models;
 using ReadLog.Services;
 using System;
 using System.Collections.Generic;
@@ -29,14 +30,14 @@ namespace ReadLog.Stores
         {
             if (manga is Manga selectedManga)
             {
-                foreach (var item  in Items)
+                foreach (var item in Items)
                 {
                     if (item is Manga mangaStored && mangaStored.Name == selectedManga.Name)
                     {
                         mangaStored.IsFavorite = selectedManga.IsFavorite;
                     }
                 }
-            await _dataService.UpdateMangaAsync(manga);
+                await _dataService.UpdateMangaAsync(manga);
             }
         }
         public async Task LoadDataAsync()
@@ -67,8 +68,12 @@ namespace ReadLog.Stores
                 itemAdded?.Invoke(manga);
                 Items.Add(manga);
                 await _dataService.AddDataAsync(manga);
-            }
 
+            }
+            else
+            {
+                throw new MangaAlreadyAddedExecption();
+            }
         }
 
         public async Task<ImageSource> LoadImageAsync(TObject manga)

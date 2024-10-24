@@ -1,24 +1,24 @@
-﻿<Window x:Class="ReadLog.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ReadLog"
-        xmlns:converters="clr-namespace:ReadLog.Converters"
-        mc:Ignorable="d"
-        Title="ReadLog"
-        Height="600"
-        Width="1000"
-        WindowStartupLocation="CenterScreen"
-        WindowStyle="None"
-        ResizeMode="NoResize">
+﻿<Window
+    x:Class="ReadLog.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:ReadLog.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ReadLog"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="ReadLog"
+    Width="1000"
+    Height="600"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
 
     <Window.Resources>
-        <converters:BoolToVisilibitySearchBox x:Key="BoolToVisilibitySearchBox" />
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Window.Resources>
 
-    <Border BorderBrush="White"
-            BorderThickness="0.5">
+    <Border BorderBrush="White" BorderThickness="0.5">
         <Grid Background="#272537">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150" />
@@ -30,83 +30,94 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
 
-            <Border Grid.ColumnSpan="2"
-                    Grid.Row="0"
-                    BorderThickness="0 0 0 0.5"
-                    BorderBrush="White" />
+            <Border
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                BorderBrush="White"
+                BorderThickness="0,0,0,0.5" />
 
-            <Border Grid.RowSpan="2"
-                    Grid.Row="0"
-                    BorderThickness="0 0 0.5 0"
-                    BorderBrush="White" />
+            <Border
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                BorderBrush="White"
+                BorderThickness="0,0,0.5,0" />
 
-            <TextBlock Text="ReadLog"
-                       Foreground="White"
-                       VerticalAlignment="Center"
-                       Margin="20 0 0 0 "
-                       FontSize="22"
-                       FontFamily="/Assets/Fonts/#Poppins" />
+            <TextBlock
+                Margin="20,0,0,0"
+                VerticalAlignment="Center"
+                FontFamily="/Assets/Fonts/#Poppins"
+                FontSize="22"
+                Foreground="White"
+                Text="ReadLog" />
 
 
-            <Grid Grid.Column="1"
-                  MouseDown="Grid_MouseDown"
-                  Background="Transparent">
+            <Grid
+                Grid.Column="1"
+                Background="Transparent"
+                MouseDown="Grid_MouseDown">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Column="1"
-                            Orientation="Horizontal"
-                            HorizontalAlignment="Right"
-                            Margin="0 0 20 0">
-                    <Button Click="Button_Reduce"
-                            Style="{StaticResource TopButton}">
-                        <TextBlock Text="_"
-                                   Padding="0 0 0 5" />
+                <StackPanel
+                    Grid.Column="1"
+                    Margin="0,0,20,0"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+                    <Button Click="Button_Reduce" Style="{StaticResource TopButton}">
+                        <TextBlock Padding="0,0,0,5" Text="_" />
                     </Button>
-                    <Button Click="Button_Close"
-                            Style="{StaticResource TopButton}"
-                            Content="X"
-                            HorizontalAlignment="Right" />
+                    <Button
+                        HorizontalAlignment="Right"
+                        Click="Button_Close"
+                        Content="X"
+                        Style="{StaticResource TopButton}" />
                 </StackPanel>
 
-                <TextBox Text="{Binding textBoxSearch, UpdateSourceTrigger=PropertyChanged}"
-                         Style="{StaticResource searchBox}"
-                         Visibility="{Binding isTextBoxVisible, Converter={StaticResource BoolToVisilibitySearchBox}}"
-                         Foreground="White"
-                         VerticalContentAlignment="Center" 
-                         Padding="5 0 0 0"/>
+                <TextBox
+                    Padding="5,0,0,0"
+                    VerticalContentAlignment="Center"
+                    Foreground="White"
+                    Style="{StaticResource searchBox}"
+                    Text="{Binding textBoxSearch, UpdateSourceTrigger=PropertyChanged}"
+                    Visibility="{Binding isTextBoxVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
             </Grid>
 
             <StackPanel Grid.Row="1">
-                <RadioButton Content="Acceuil"
-                             Style="{StaticResource MenuButton}"
-                             IsChecked="True"
-                             Command="{Binding NavigationToHome}" />
-                <RadioButton Content="Manga"
-                             Style="{StaticResource MenuButton}"
-                             Command="{Binding NavigationToManga}" />
-                <RadioButton Content="Options"
-                             Style="{StaticResource MenuButton}"
-                             Command="{Binding NavigationToSettings}" />
+                <RadioButton
+                    Command="{Binding NavigationToHome}"
+                    Content="Acceuil"
+                    IsChecked="True"
+                    Style="{StaticResource MenuButton}" />
+                <RadioButton
+                    Command="{Binding NavigationToManga}"
+                    Content="Manga"
+                    Style="{StaticResource MenuButton}" />
+                <RadioButton
+                    Command="{Binding NavigationToSettings}"
+                    Content="Options"
+                    Style="{StaticResource MenuButton}" />
             </StackPanel>
-            <Border VerticalAlignment="Bottom"
-                    Grid.Row="1"
-                    BorderBrush="White"
-                    BorderThickness="0 0.5 0 0">
-                <TextBlock Text="D.Samuel"
-                           FontSize="22"
-                           Margin="20 0 0 0 "
-                           FontFamily="/Assets/Fonts/#Poppins"
-                           Foreground="White" />
+            <Border
+                Grid.Row="1"
+                VerticalAlignment="Bottom"
+                BorderBrush="White"
+                BorderThickness="0,0.5,0,0">
+                <TextBlock
+                    Margin="20,0,0,0"
+                    FontFamily="/Assets/Fonts/#Poppins"
+                    FontSize="22"
+                    Foreground="White"
+                    Text="D.Samuel" />
             </Border>
 
-            <ContentControl Grid.Row="1"
-                            Grid.Column="1"
-                            Content="{Binding Navigation.CurrentView}"
-                            Padding="0"
-                            Width="850" />
+            <ContentControl
+                Grid.Row="1"
+                Grid.Column="1"
+                Width="850"
+                Padding="0"
+                Content="{Binding Navigation.CurrentView}" />
 
         </Grid>
     </Border>

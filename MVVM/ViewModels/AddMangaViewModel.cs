@@ -16,6 +16,9 @@ namespace ReadLog.MVVM.ViewModels
     public class AddMangaViewModel : ViewModelBase
     {
 
+        public MessageViewModel ErrorMessage { get; }
+        public MessageViewModel SuccessMessage { get; }
+
         public RelayCommand AddMangaCommand { get; set; }
 
         private string _mangaName;
@@ -64,32 +67,46 @@ namespace ReadLog.MVVM.ViewModels
         public AddMangaViewModel(INavigationService navigationService, DataStore<Manga> dataStore, IMangaApiClient mangaApiClient) : base(navigationService, dataStore)
         {
             _mangaApiClient = mangaApiClient;
+            ErrorMessage = new MessageViewModel(navigationService, dataStore);
+            SuccessMessage = new MessageViewModel(navigationService, dataStore);
             AddMangaCommand = new RelayCommand(async execute => await AddManga(), canExecute => checkBoxes());
         }
-
-        private bool checkBoxes()
-        {
-            return !string.IsNullOrEmpty(_mangaName);
-        }
-
+        private bool checkBoxes() => !string.IsNullOrEmpty(_mangaName);
         public void resetUI()
         {
             IsFavorite = false;
             MangaName = "";
             NumberChapiter = "0";
+
+            ErrorMessage.ClearMessage();
+            SuccessMessage.ClearMessage();
         }
 
         private async Task AddManga()
         {
-            Manga newManga = await _mangaApiClient.GetMangaByName(_mangaName);
-            if (newManga != null)
-            {
-                newManga.IsFavorite = IsFavorite;
-                newManga.NombreChapitresLus = NumberChapiter;
-                
-                Debug.WriteLine(newManga.ToString());
-                await _datatStore.AddDataAsync(newManga);
 
+            ErrorMessage.ClearMessage();
+            SuccessMessage.ClearMessage();
+            try
+            {
+                Manga newManga = await _mangaApiClient.GetMangaByName(_mangaName);
+                if (newManga != null)
+                {
+                    newManga.IsFavorite = IsFavorite;
+                    newManga.NombreChapitresLus = NumberChapiter;
+
+                    Debug.WriteLine(newManga.ToString());
+                    await _datatStore.AddDataAsync(newManga);
+                    SuccessMessage.DisplayMessage($"{MangaName} found and added!");
+                }
+                else
+                {
+                    throw new MangaNotFoundException($"'{MangaName}' doesn't exist!");
+                }
+            }
+            catch (CustomExceptionBase ex)
+            {
+                ErrorMessage.DisplayMessage(ex);
             }
 
         }
