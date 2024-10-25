@@ -15,6 +15,7 @@ namespace ReadLog.MVVM.ViewModels
     {
         public MessageViewModel(INavigationService navigationService, DataStore<Manga> dataStore) : base(navigationService, dataStore)
         {
+            Content = string.Empty;
         }
 
         private string _content;

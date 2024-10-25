@@ -18,6 +18,7 @@ namespace ReadLog.MVVM.ViewModels
     public class MangaViewModel : ViewModelBase
     {
 
+        public MessageViewModel ErrorMessage { get; }
         public RelayCommand AddMangaCommand { get; }
         public RelayCommand EditionMangaCommand { get; set; }
 
@@ -31,9 +32,11 @@ namespace ReadLog.MVVM.ViewModels
         private readonly Window _addMangaWindow;
         public MangaViewModel(INavigationService navigationService, DataStore<Manga> dataStore, IListViewFilterService listViewFilterService, IServiceProvider serviceProvider) : base(navigationService, dataStore)
         {
+            ErrorMessage = new MessageViewModel(navigationService, dataStore);
+
             InitData(dataStore);
 
-            AddMangaCommand = new RelayCommand(execute => NavigateAddView());
+            AddMangaCommand = new RelayCommand(execute => NavigateAddView(), canExecute => !ErrorMessage.HasMessage);
             EditionMangaCommand = new RelayCommand(execute => OnItemDoubleClick((Manga)execute));
 
             _serviceProvider = serviceProvider;
@@ -45,9 +48,8 @@ namespace ReadLog.MVVM.ViewModels
 
             _listViewFilterService = listViewFilterService;
             _listViewFilterService.FilterTextChanged += OnFilterTextChanged;
-            _datatStore.itemAdded += OnItemAdded;
+            _dataStore.itemAdded += OnItemAdded;
         }
-
         private void OnItemDoubleClick(Manga selectedItem)
         {
             if (selectedItem != null)
@@ -73,7 +75,6 @@ namespace ReadLog.MVVM.ViewModels
 
             else
             {
-
                 var itemFiltered = Items.Where(manga => manga.Name.ToLower().Contains(_filterText)).ToList();
                 foreach (var item in itemFiltered) { FilteredItems.Add(item); }
             }
@@ -87,9 +88,17 @@ namespace ReadLog.MVVM.ViewModels
 
         private async void InitData(DataStore<Manga> dataStore)
         {
-            await dataStore.LoadDataAsync();
-            Items = dataStore.Items;
-            FilteredItems = new ObservableCollection<Manga>(Items);
+            try
+            {
+                await dataStore.LoadDataAsync();
+                Items = dataStore.Items;
+                FilteredItems = new ObservableCollection<Manga>(Items);
+
+            }
+            catch (CustomExceptionBase ex)
+            {
+                ErrorMessage.DisplayMessage(ex.Message);
+            }
 
         }
     }

@@ -1,77 +1,70 @@
-﻿<UserControl x:Class="ReadLog.MVVM.Views.MangaView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:ReadLog.MVVM.Views"
-             xmlns:converters="clr-namespace:ReadLog.Converters"
-             mc:Ignorable="d"
-             d:DesignHeight="450"
-             d:DesignWidth="850">
+﻿<UserControl
+    x:Class="ReadLog.MVVM.Views.MangaView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:ReadLog.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ReadLog.MVVM.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="850"
+    mc:Ignorable="d">
     <UserControl.Resources>
         <converters:BoolToImageConverter x:Key="BoolToImageConverter" />
 
         <Style TargetType="GridViewColumnHeader">
-            <Setter Property="Background"
-                    Value="#53506f" />
-            <Setter Property="Foreground"
-                    Value="White" />
-            <Setter Property="FontWeight"
-                    Value="SemiBold" />
-            <Setter Property="FontFamily"
-                    Value="/Assets/Fonts/#Poppins" />
-            <Setter Property="Cursor"
-                    Value="Arrow" />
+            <Setter Property="Background" Value="#53506f" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="FontFamily" Value="/Assets/Fonts/#Poppins" />
+            <Setter Property="Cursor" Value="Arrow" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="GridViewColumnHeader">
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="White"
-                                BorderThickness="0 0 0 1">
-                            <ContentPresenter VerticalAlignment="Center"
-                                              HorizontalAlignment="Center"
-                                              Margin="10" />
+                        <Border
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="White"
+                            BorderThickness="0,0,0,1">
+                            <ContentPresenter
+                                Margin="10"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center" />
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
 
-        <Style x:Key="ListViewAddButton"
-               TargetType="Button">
+        <Style x:Key="ListViewAddButton" TargetType="Button">
 
-            <Setter Property="Background"
-                    Value="#75719c" />
-            <Setter Property="Foreground"
-                    Value="White" />
-            <Setter Property="Margin"
-                    Value="5" />
-            <Setter Property="Height"
-                    Value="30" />
-            <Setter Property="FontSize"
-                    Value="26" />
-            <Setter Property="HorizontalContentAlignment"
-                    Value="Center" />
-            <Setter Property="VerticalContentAlignment"
-                    Value="Center" />
+            <Setter Property="Background" Value="#75719c" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="FontSize" Value="26" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="Transparent"
-                                BorderThickness="0"
-                                CornerRadius="10">
-                            <ContentPresenter Content="{TemplateBinding Content}"
-                                              HorizontalAlignment="Center"
-                                              Margin="0,-5,0,-5" />
+                        <Border
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="Transparent"
+                            BorderThickness="0"
+                            CornerRadius="10">
+                            <ContentPresenter
+                                Margin="0,-5,0,-5"
+                                HorizontalAlignment="Center"
+                                Content="{TemplateBinding Content}" />
                         </Border>
                         <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver"
-                                     Value="True">
-                                <Setter Property="Background"
-                                        Value="#646184" />
-                                <Setter Property="Cursor"
-                                        Value="Hand" />
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#646184" />
+                                <Setter Property="Cursor" Value="Hand" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="#434058" />
+                                <Setter Property="Cursor" Value="Wait" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -80,138 +73,130 @@
 
         </Style>
 
-        <Style x:Key="CenteredTextBlock"
-               TargetType="TextBlock">
-            <Setter Property="Foreground"
-                    Value="White" />
-            <Setter Property="FontWeight"
-                    Value="SemiBold" />
+        <Style x:Key="CenteredTextBlock" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontWeight" Value="SemiBold" />
         </Style>
 
         <Style TargetType="ListViewItem">
-            <Setter Property="VerticalContentAlignment"
-                    Value="Center" />
-            <Setter Property="HorizontalContentAlignment"
-                    Value="Center" />
-            <Setter Property="Height"
-                    Value="50" />
-            <Setter Property="Background"
-                    Value="Transparent" />
-            <Setter Property="BorderBrush"
-                    Value="DarkGray" />
-            <Setter Property="BorderThickness"
-                    Value="0 0 0 0.5" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="Height" Value="50" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="DarkGray" />
+            <Setter Property="BorderThickness" Value="0,0,0,0.5" />
 
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListViewItem">
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}">
-                            <GridViewRowPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
+                        <Border
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                            <GridViewRowPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
 
             <Style.Triggers>
-                <Trigger Property="IsMouseOver"
-                         Value="True">
-                    <Setter Property="Background"
-                            Value="#53506f" />
-                    <Setter Property="Cursor"
-                            Value="Hand" />
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#53506f" />
+                    <Setter Property="Cursor" Value="Hand" />
                 </Trigger>
 
-                <Trigger Property="IsSelected"
-                         Value="True">
-                    <Setter Property="Background"
-                            Value="#53506f" />
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#53506f" />
                 </Trigger>
             </Style.Triggers>
         </Style>
 
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
 
 
-    <ListView ItemsSource="{Binding FilteredItems, UpdateSourceTrigger=PropertyChanged}"
-              Background="#3a384d"
-              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-              HorizontalAlignment="Stretch"
-              VerticalAlignment="Stretch"
-              BorderThickness="0"
-              Margin="0"
-              Padding="10"
-              Name="DataListView"
-              SelectedItem="SelectedItem"
-              MouseDoubleClick="DataListView_MouseDoubleClick">
+    <ListView
+        Name="DataListView"
+        Margin="0"
+        Padding="10"
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch"
+        Background="#3a384d"
+        BorderThickness="0"
+        ItemsSource="{Binding FilteredItems, UpdateSourceTrigger=PropertyChanged}"
+        MouseDoubleClick="DataListView_MouseDoubleClick"
+        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+        SelectedItem="SelectedItem">
         <ListView.Template>
             <ControlTemplate TargetType="ListView">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <GridViewHeaderRowPresenter Grid.Row="0"
-                                                Columns="{Binding Path=View.Columns, RelativeSource={RelativeSource TemplatedParent}}" />
+                    <GridViewHeaderRowPresenter Grid.Row="0" Columns="{Binding Path=View.Columns, RelativeSource={RelativeSource TemplatedParent}}" />
 
-                    <Button Grid.Row="1"
-                            Content="+"
-                            Style="{StaticResource ListViewAddButton}" 
-                            Command="{Binding AddMangaCommand}"/>
+                    <Button
+                        Grid.Row="1"
+                        Command="{Binding AddMangaCommand}"
+                        Content="+"
+                        Style="{StaticResource ListViewAddButton}" />
 
-                    <ScrollViewer Grid.Row="2"
-                                  CanContentScroll="True">
+                    <ScrollViewer Grid.Row="3" CanContentScroll="True">
                         <ItemsPresenter />
                     </ScrollViewer>
+                    <TextBlock
+                        Grid.Row="2"
+                        DataContext="{Binding ErrorMessage}"
+                        Style="{StaticResource ErrorMessage}"
+                        Text="{Binding Content}"
+                        Visibility="{Binding HasMessage, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+
                 </Grid>
             </ControlTemplate>
         </ListView.Template>
 
         <ListView.View>
             <GridView>
-                <GridViewColumn Header="Favorite"
-                                Width="100">
+                <GridViewColumn Width="100" Header="Favorite">
                     <GridViewColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding IsFavorite, Converter={StaticResource BoolToImageConverter}}"
-                                   MaxHeight="20"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Center" />
+                            <Image
+                                MaxHeight="20"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Source="{Binding IsFavorite, Converter={StaticResource BoolToImageConverter}}" />
                         </DataTemplate>
                     </GridViewColumn.CellTemplate>
                 </GridViewColumn>
 
-                <GridViewColumn Header="Chapitre(s)"
-                                Width="100">
+                <GridViewColumn Width="100" Header="Chapitre(s)">
                     <GridViewColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding NombreChapitresLus}"
-                                       Style="{StaticResource CenteredTextBlock}" />
+                            <TextBlock Style="{StaticResource CenteredTextBlock}" Text="{Binding NombreChapitresLus}" />
                         </DataTemplate>
                     </GridViewColumn.CellTemplate>
                 </GridViewColumn>
 
-                <GridViewColumn Header="Nom du manga"
-                                Width="250">
+                <GridViewColumn Width="250" Header="Nom du manga">
                     <GridViewColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Name}"
-                                       Style="{StaticResource CenteredTextBlock}" />
+                            <TextBlock Style="{StaticResource CenteredTextBlock}" Text="{Binding Name}" />
                         </DataTemplate>
                     </GridViewColumn.CellTemplate>
                 </GridViewColumn>
 
-                <GridViewColumn Header="Description"
-                                Width="400">
+                <GridViewColumn Width="400" Header="Description">
                     <GridViewColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Description}"
-                                       Style="{StaticResource CenteredTextBlock}"
-                                       TextTrimming="CharacterEllipsis" />
+                            <TextBlock
+                                Style="{StaticResource CenteredTextBlock}"
+                                Text="{Binding Description}"
+                                TextTrimming="CharacterEllipsis" />
                         </DataTemplate>
                     </GridViewColumn.CellTemplate>
                 </GridViewColumn>

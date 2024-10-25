@@ -17,10 +17,8 @@ namespace ReadLog.MVVM.ViewModels
     public class MangaEditionViewModel : ViewModelBase, IParameterNavigationService
     {
 
-        private readonly DataStore<Manga> _dataStore;
         public MangaEditionViewModel(INavigationService navigationService, DataStore<Manga> dataStore) : base(navigationService, dataStore)
         {
-            _dataStore = dataStore;
             ValidationCommand = new RelayCommand(execute => updateInformations());
         }
 

@@ -6,24 +6,20 @@ namespace ReadLog.Core
     {
         Unknown,
         MangaNotFound,
-        AlreadyAdded
+        AlreadyAdded,
+        JsonError
     }
 
     public class CustomExceptionBase : Exception
     {
         public ExceptionType ExceptionType { get; }
-        public CustomExceptionBase()
-        {
-            ExceptionType = ExceptionType.Unknown;
-        }
-       
-        public CustomExceptionBase(string message)
+        public CustomExceptionBase(string message = "No error message")
             : base(message)
         {
             ExceptionType = ExceptionType.Unknown;
         }
         
-        public CustomExceptionBase(ExceptionType exceptionType, string message)
+        public CustomExceptionBase(ExceptionType exceptionType, string message = "No error message")
             : base(message)
         {
             ExceptionType = exceptionType;
@@ -42,6 +38,14 @@ namespace ReadLog.Core
     {
         public MangaAlreadyAddedExecption(string message = "Manga Already Added!")
             : base(ExceptionType.AlreadyAdded, message)
+        {
+        }
+    }
+
+    public class CustomJsonErrorException : CustomExceptionBase 
+    { 
+        public CustomJsonErrorException(string message = "Json error!")
+            : base(ExceptionType.JsonError, message)
         {
         }
     }

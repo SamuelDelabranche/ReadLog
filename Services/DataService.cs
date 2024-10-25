@@ -43,36 +43,40 @@ namespace ReadLog.Services
         public async Task<List<TObject>> LoadDataAsync()
         {
 
-            if (!File.Exists(filePath))
+            if (!File.Exists(filePath) || new FileInfo(filePath).Length == 0)
             {
+                using (FileStream fs = File.Create(filePath)) { };
                 return new List<TObject>();
             }
 
-
-            try
+            else
             {
-                var json = await File.ReadAllTextAsync(filePath);
-                var options = new JsonSerializerOptions
+
+                try
                 {
-                    PropertyNameCaseInsensitive = true,
-                };
+                    var json = await File.ReadAllTextAsync(filePath);
+                    var options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true,
+                    };
 
-                var result = JsonSerializer.Deserialize<List<TObject>>(json, options);
+                    var result = JsonSerializer.Deserialize<List<TObject>>(json, options);
 
-                Debug.WriteLine("SUCCESS JSON LOADING");
+                    Debug.WriteLine("SUCCESS JSON LOADING");
 
-                return result ?? new List<TObject>();
+                    return result ?? new List<TObject>();
 
-            }
-            catch (JsonException ex)
-            {
-                Debug.WriteLine("JSON_ERROR ", ex.Message);
-                return new List<TObject>();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("ERROR ", ex.Message);
-                return new List<TObject>();
+                }
+                catch (JsonException ex)
+                {
+                    Debug.WriteLine("JSON_ERROR ", ex.Message);
+                    throw new CustomJsonErrorException(ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("ERROR ", ex.Message);
+                    return new List<TObject>();
+                }
             }
         }
 
@@ -83,7 +87,7 @@ namespace ReadLog.Services
                 List<TObject> result = await LoadDataAsync();
                 string imagePath = null;
 
-                foreach(var item in result)
+                foreach (var item in result)
                 {
                     if (item is Manga storedManga && manga is Manga selectedManga && storedManga.Name == selectedManga.Name)
                     {
@@ -99,7 +103,7 @@ namespace ReadLog.Services
                     bitmap.CacheOption = BitmapCacheOption.OnLoad;
                     bitmap.EndInit();
                     bitmap.Freeze();
-                    
+
                     Debug.WriteLine("Image Chargée");
 
                     return bitmap;

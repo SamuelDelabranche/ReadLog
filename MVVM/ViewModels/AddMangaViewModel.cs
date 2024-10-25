@@ -96,7 +96,7 @@ namespace ReadLog.MVVM.ViewModels
                     newManga.NombreChapitresLus = NumberChapiter;
 
                     Debug.WriteLine(newManga.ToString());
-                    await _datatStore.AddDataAsync(newManga);
+                    await _dataStore.AddDataAsync(newManga);
                     SuccessMessage.DisplayMessage($"{MangaName} found and added!");
                 }
                 else
