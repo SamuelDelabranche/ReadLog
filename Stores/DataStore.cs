@@ -20,7 +20,8 @@ namespace ReadLog.Stores
         private readonly IDataService<TObject> _dataService;
         public ObservableCollection<TObject> Items { get; set; }
 
-        public event Action<TObject> itemAdded;
+        public event Action<TObject> itemAddedWithMangaReturned;
+        public event Action itemAdded;
         public DataStore(IDataService<TObject> dataService)
         {
             _dataService = dataService;
@@ -68,9 +69,10 @@ namespace ReadLog.Stores
 
             if (!alreadyAdded)
             {
-                itemAdded?.Invoke(manga);
-                Items.Add(manga);
                 await _dataService.AddDataAsync(manga);
+                Items.Add(manga);
+                itemAddedWithMangaReturned?.Invoke(manga);
+                itemAdded?.Invoke();
 
             }
             else
@@ -87,6 +89,15 @@ namespace ReadLog.Stores
             }
 
             return null;
+        }
+
+        public async Task<string> GetMangaTitleAsync(TObject manga)
+        {
+            if (Items.Contains(manga))
+            {
+                return await _dataService.GetMangaTitleAsync(manga);
+            }
+            return "Not found";
         }
     }
 }

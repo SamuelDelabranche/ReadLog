@@ -21,8 +21,9 @@ namespace ReadLog.Services
         Task<List<TObject>> LoadDataAsync();
         Task AddDataAsync(TObject manga);
         Task UpdateMangaAsync(TObject manga);
-
         Task<ImageSource> LoadImageAsync(TObject manga);
+
+        Task<string> GetMangaTitleAsync(TObject manga);
     }
     public class DataService<TObject> : Observable, IDataService<TObject>
     {
@@ -38,6 +39,19 @@ namespace ReadLog.Services
                 await File.WriteAllTextAsync(filePath, updatedJson);
             }
 
+        }
+
+        public async Task<string> GetMangaTitleAsync(TObject manga)
+        {
+            List<TObject> result = await LoadDataAsync();
+            foreach (var item in result)
+            {
+                if (item is Manga storedManga && manga is Manga selectedManga && storedManga.Name == selectedManga.Name)
+                {
+                    return storedManga.Name;
+                }
+            }
+            return "Not found";
         }
 
         public async Task<List<TObject>> LoadDataAsync()

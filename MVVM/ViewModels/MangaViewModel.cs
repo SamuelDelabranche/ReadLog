@@ -56,7 +56,7 @@ namespace ReadLog.MVVM.ViewModels
 
             _listViewFilterService = listViewFilterService;
             _listViewFilterService.FilterTextChanged += OnFilterTextChanged;
-            _dataStore.itemAdded += OnItemAdded;
+            _dataStore.itemAddedWithMangaReturned += OnItemAdded;
         }
         private void OnItemDoubleClick(Manga selectedItem)
         {

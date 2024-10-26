@@ -94,6 +94,8 @@ namespace ReadLog.MVVM.ViewModels
                 {
                     newManga.IsFavorite = IsFavorite;
                     newManga.NombreChapitresLus = NumberChapiter;
+                    if (string.IsNullOrEmpty(newManga.NombreChapitresLus))
+                        newManga.NombreChapitresLus = "0";
 
                     Debug.WriteLine(newManga.ToString());
                     await _dataStore.AddDataAsync(newManga);
