@@ -111,16 +111,24 @@ namespace ReadLog.Services
 
                 if (imagePath != null && !string.IsNullOrEmpty(imagePath))
                 {
-                    BitmapImage bitmap = new BitmapImage();
-                    bitmap.BeginInit();
-                    bitmap.UriSource = new Uri(imagePath, UriKind.RelativeOrAbsolute);
-                    bitmap.CacheOption = BitmapCacheOption.OnLoad;
-                    bitmap.EndInit();
-                    bitmap.Freeze();
+                    try
+                    {
+                        BitmapImage bitmap = new BitmapImage();
+                        bitmap.BeginInit();
+                        bitmap.UriSource = new Uri(imagePath, UriKind.RelativeOrAbsolute);
+                        bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                        bitmap.EndInit();
+                        bitmap.Freeze();
 
-                    Debug.WriteLine("Image Chargée");
+                        Debug.WriteLine("Image Chargée");
 
-                    return bitmap;
+                        return bitmap;
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine(ex.Message);
+                        return null;
+                    }
                 }
                 return null;
             }
