@@ -70,7 +70,7 @@ namespace ReadLog.Services
                 catch (JsonException ex)
                 {
                     Debug.WriteLine("JSON_ERROR ", ex.Message);
-                    throw new CustomJsonErrorException(ex.Message);
+                    throw new CustomJsonErrorException();
                 }
                 catch (Exception ex)
                 {

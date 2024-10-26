@@ -32,19 +32,27 @@ namespace ReadLog.MVVM.ViewModels
         private readonly Window _addMangaWindow;
         public MangaViewModel(INavigationService navigationService, DataStore<Manga> dataStore, IListViewFilterService listViewFilterService, IServiceProvider serviceProvider) : base(navigationService, dataStore)
         {
-            ErrorMessage = new MessageViewModel(navigationService, dataStore);
+            if (_dataStore.Status.HasMessage)
+            {
+                ErrorMessage = _dataStore.Status;
+                Items = null;
+                FilteredItems = null;
+            }
+            else
+            {
+                ErrorMessage = new MessageViewModel();
+                Items = _dataStore.Items;
+                FilteredItems = new ObservableCollection<Manga>(Items);
+            }
 
-            InitData(dataStore);
 
             AddMangaCommand = new RelayCommand(execute => NavigateAddView(), canExecute => !ErrorMessage.HasMessage);
             EditionMangaCommand = new RelayCommand(execute => OnItemDoubleClick((Manga)execute));
 
             _serviceProvider = serviceProvider;
 
-            var mainWindow = serviceProvider.GetRequiredService<MainWindow>();
             _addMangaWindow = serviceProvider.GetRequiredService<AddMangaWindow>();
-
-            _addMangaWindow.Owner = mainWindow;
+            _addMangaWindow.Owner = serviceProvider.GetRequiredService<MainWindow>();
 
             _listViewFilterService = listViewFilterService;
             _listViewFilterService.FilterTextChanged += OnFilterTextChanged;
@@ -84,22 +92,6 @@ namespace ReadLog.MVVM.ViewModels
         private void NavigateAddView()
         {
             _addMangaWindow.ShowDialog();
-        }
-
-        private async void InitData(DataStore<Manga> dataStore)
-        {
-            try
-            {
-                await dataStore.LoadDataAsync();
-                Items = dataStore.Items;
-                FilteredItems = new ObservableCollection<Manga>(Items);
-
-            }
-            catch (CustomExceptionBase ex)
-            {
-                ErrorMessage.DisplayMessage(ex.Message);
-            }
-
         }
     }
 }

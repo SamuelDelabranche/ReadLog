@@ -18,6 +18,11 @@ namespace ReadLog.MVVM.ViewModels
             Content = string.Empty;
         }
 
+        public MessageViewModel()
+        {
+            Content = string.Empty;
+        }
+
         private string _content;
         public string Content
         {

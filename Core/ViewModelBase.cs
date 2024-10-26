@@ -21,5 +21,11 @@ namespace ReadLog.Core
             _navigationService = navigationService;
             _dataStore = dataStore;
         }
+
+        public ViewModelBase()
+        {
+            _navigationService = null;
+            _dataStore = null;
+        }
     }
 }

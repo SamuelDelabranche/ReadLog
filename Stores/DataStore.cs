@@ -1,5 +1,6 @@
 ﻿using ReadLog.Core;
 using ReadLog.MVVM.Models;
+using ReadLog.MVVM.ViewModels;
 using ReadLog.Services;
 using System;
 using System.Collections.Generic;
@@ -14,17 +15,19 @@ namespace ReadLog.Stores
 {
     public class DataStore<TObject>
     {
+        public MessageViewModel Status { get; }
+
         private readonly IDataService<TObject> _dataService;
         public ObservableCollection<TObject> Items { get; set; }
 
         public event Action<TObject> itemAdded;
-
         public DataStore(IDataService<TObject> dataService)
         {
             _dataService = dataService;
             Items = new ObservableCollection<TObject>();
-
+            Status = new MessageViewModel();
         }
+
 
         public async Task UpdateMangaAsync(TObject manga)
         {

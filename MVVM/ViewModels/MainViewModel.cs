@@ -51,6 +51,7 @@ namespace ReadLog.MVVM.ViewModels
 
         public MainViewModel(INavigationService navigationService, DataStore<Manga> dataStore, IListViewFilterService listViewFilterService) : base(navigationService, dataStore)
         {
+
             _isTextBoxVisible = false;
             _listViewFilterService = listViewFilterService;
 

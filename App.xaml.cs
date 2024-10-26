@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,6 +27,9 @@ namespace ReadLog
         private readonly IServiceCollection _services = new ServiceCollection();
         public App()
         {
+            _services.AddSingleton<IDataService<Manga>, DataService<Manga>>();
+            _services.AddSingleton<DataStore<Manga>>();
+
             _services.AddSingleton<MainViewModel>();
             _services.AddSingleton<AddMangaViewModel>();
 
@@ -34,12 +38,10 @@ namespace ReadLog
             _services.AddSingleton<SettingsViewModel>();
             _services.AddSingleton<MangaEditionViewModel>();
 
-            _services.AddSingleton<INavigationService,  NavigationService>();
+            _services.AddSingleton<INavigationService, NavigationService>();
             _services.AddSingleton<IViewModelFactory, ViewModelFactory>();
-            _services.AddSingleton<IDataService<Manga>, DataService<Manga>>();
             _services.AddSingleton<IListViewFilterService, ListViewFilterService>();
             _services.AddSingleton<IMangaApiClient, MangaApiClient>();
-            _services.AddSingleton<DataStore<Manga>>();
 
             _services.AddSingleton<MainWindow>(provider => new MainWindow()
             {
@@ -54,12 +56,27 @@ namespace ReadLog
             _serviceProvider = _services.BuildServiceProvider();
         }
 
-        protected override void OnStartup(StartupEventArgs e)
+        protected override async void OnStartup(StartupEventArgs e)
         {
+            _serviceProvider.GetRequiredService<IDataService<Manga>>().filePath = "../../../Stores/Data.json";
+
+            await InitializeAsync();
 
             _serviceProvider.GetRequiredService<MainWindow>().Show();
-            _serviceProvider.GetRequiredService<IDataService<Manga>>().filePath = "../../../Stores/Data.json";
             base.OnStartup(e);
+        }
+
+        private async Task InitializeAsync()
+        {
+            DataStore<Manga> dataStore = _serviceProvider.GetRequiredService<DataStore<Manga>>();
+            try
+            {
+                await dataStore.LoadDataAsync();
+            }
+            catch (CustomExceptionBase ex)
+            {
+                dataStore.Status.DisplayMessage(ex);
+            }
         }
     }
 }

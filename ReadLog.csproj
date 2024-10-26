@@ -5,11 +5,16 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <UseWPF>true</UseWPF>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <ApplicationIcon>Assets\Images\logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Assets\Fonts\Poppins-Regular.ttf" />
+    <None Remove="Assets\Images\Icon.png" />
     <None Remove="Assets\Images\like.png" />
     <None Remove="Assets\Images\unlike.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Images\logo.ico" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
