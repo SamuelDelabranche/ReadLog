@@ -363,7 +363,5 @@ MigrationBackup/
 FodyWeavers.xsd
 
 #Custom
-Stores/coverArt/*
-!Stores/coverArt/.gitkeep
-
+Stores/covertArt/*
 Stores/Data.json

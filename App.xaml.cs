@@ -5,16 +5,9 @@ using ReadLog.MVVM.ViewModels;
 using ReadLog.MVVM.Views;
 using ReadLog.Services;
 using ReadLog.Stores;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
 using System.Configuration;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Automation.Peers;
 
 namespace ReadLog
 {
@@ -25,14 +18,22 @@ namespace ReadLog
     {
         private readonly ServiceProvider _serviceProvider;
         private readonly IServiceCollection _services = new ServiceCollection();
+
         public App()
         {
+            _services.AddSingleton<AppConfig>();
             _services.AddSingleton<IDataService<Manga>, DataService<Manga>>();
-            _services.AddSingleton<DataStore<Manga>>();
+            _services.AddSingleton(provider =>
+            {
+                var dataService = provider.GetRequiredService<IDataService<Manga>>();
+                var dataStore = new DataStore<Manga>(dataService);
+
+                dataStore.setDataBasePath(provider.GetRequiredService<AppConfig>().DataFilePath);
+                return dataStore;
+            });
 
             _services.AddSingleton<MainViewModel>();
             _services.AddSingleton<AddMangaViewModel>();
-
             _services.AddSingleton<HomeViewModel>();
             _services.AddSingleton<MangaViewModel>();
             _services.AddSingleton<SettingsViewModel>();
@@ -45,12 +46,12 @@ namespace ReadLog
 
             _services.AddSingleton<MainWindow>(provider => new MainWindow()
             {
-                DataContext = _serviceProvider.GetRequiredService<MainViewModel>()
+                DataContext = provider.GetRequiredService<MainViewModel>()
             });
 
             _services.AddSingleton<AddMangaWindow>(provider => new AddMangaWindow()
             {
-                DataContext = _serviceProvider.GetRequiredService<AddMangaViewModel>()
+                DataContext = provider.GetRequiredService<AddMangaViewModel>()
             });
 
             _serviceProvider = _services.BuildServiceProvider();
@@ -58,15 +59,20 @@ namespace ReadLog
 
         protected override async void OnStartup(StartupEventArgs e)
         {
-            _serviceProvider.GetRequiredService<IDataService<Manga>>().filePath = "../../../Stores/Data.json";
+            System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 
-            await InitializeAsync();
+            if (config.Sections["AppConfig"] == null)
+                config.Sections.Add("AppConfig", _serviceProvider.GetRequiredService<AppConfig>());
+            var appConfigSection = config.GetSection("AppConfig") as AppConfig;
 
+
+
+            await InitializeDataStoreAsync();
             _serviceProvider.GetRequiredService<MainWindow>().Show();
             base.OnStartup(e);
         }
 
-        private async Task InitializeAsync()
+        private async Task InitializeDataStoreAsync()
         {
             DataStore<Manga> dataStore = _serviceProvider.GetRequiredService<DataStore<Manga>>();
             try

@@ -99,5 +99,10 @@ namespace ReadLog.Stores
             }
             return "Not found";
         }
+
+        public void setDataBasePath(string dataBasePath)
+        {
+            _dataService.dataBasePath = dataBasePath;
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace ReadLog.Services
 
     public interface IDataService<TObject>
     {
-        string filePath { get; set; }
+        string dataBasePath { get; set; }
         Task<List<TObject>> LoadDataAsync();
         Task AddDataAsync(TObject manga);
         Task UpdateMangaAsync(TObject manga);
@@ -27,16 +27,16 @@ namespace ReadLog.Services
     }
     public class DataService<TObject> : Observable, IDataService<TObject>
     {
-        public string filePath { get; set; }
+        public string dataBasePath { get; set; }
 
         public async Task AddDataAsync(TObject manga)
         {
             List<TObject> data = await LoadDataAsync();
-            if (!string.IsNullOrEmpty(filePath))
+            if (!string.IsNullOrEmpty(dataBasePath))
             {
                 data.Add(manga);
                 var updatedJson = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });
-                await File.WriteAllTextAsync(filePath, updatedJson);
+                await File.WriteAllTextAsync(dataBasePath, updatedJson);
             }
 
         }
@@ -57,9 +57,9 @@ namespace ReadLog.Services
         public async Task<List<TObject>> LoadDataAsync()
         {
 
-            if (!File.Exists(filePath) || new FileInfo(filePath).Length == 0)
+            if (!File.Exists(dataBasePath) || new FileInfo(dataBasePath).Length == 0)
             {
-                using (FileStream fs = File.Create(filePath)) { };
+                using (FileStream fs = File.Create(dataBasePath)) { };
                 return new List<TObject>();
             }
 
@@ -68,7 +68,7 @@ namespace ReadLog.Services
 
                 try
                 {
-                    var json = await File.ReadAllTextAsync(filePath);
+                    var json = await File.ReadAllTextAsync(dataBasePath);
                     var options = new JsonSerializerOptions
                     {
                         PropertyNameCaseInsensitive = true,
@@ -150,7 +150,7 @@ namespace ReadLog.Services
                     }
                 }
                 var updatedJson = JsonSerializer.Serialize(result, new JsonSerializerOptions { WriteIndented = true });
-                await File.WriteAllTextAsync(filePath, updatedJson);
+                await File.WriteAllTextAsync(dataBasePath, updatedJson);
             }
             catch (JsonException ex) { Debug.WriteLine("JSON_ERROR ", ex.Message); }
         }
