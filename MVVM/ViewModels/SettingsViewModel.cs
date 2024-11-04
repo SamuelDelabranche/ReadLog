@@ -1,10 +1,13 @@
-﻿using Microsoft.Win32;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Win32;
 using ReadLog.Core;
 using ReadLog.MVVM.Models;
+using ReadLog.MVVM.Views;
 using ReadLog.Services;
 using ReadLog.Stores;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -29,19 +32,48 @@ namespace ReadLog.MVVM.ViewModels
         }
 
         public RelayCommand SelectedData { get; }
-        public SettingsViewModel(INavigationService navigationService, DataStore<Manga> dataStore) : base(navigationService, dataStore)
-        {
+        public RelayCommand SaveConfiguration { get; }
 
+        private readonly AppConfig _appConfig;
+        public SettingsViewModel(INavigationService navigationService, DataStore<Manga> dataStore, AppConfig appConfig) : base(navigationService, dataStore)
+        {
+            _appConfig = appConfig;
             try
             {
-                dataPath = Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.FullName, "Stores/Data.json");
+                dataPath = _appConfig.DataFilePath;
             }
             catch
             {
-
+                dataPath = "Not Found";
             }
 
             SelectedData = new RelayCommand(execute => OpenFileSelector());
+            SaveConfiguration = new RelayCommand(async execute => await SaveAppConfigurationAsync());
+        }
+
+        private async Task SaveAppConfigurationAsync()
+        {
+            try
+            {
+                System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+
+                AppConfig appConfigurationSection = config.GetSection("AppConfig") as AppConfig;
+
+                appConfigurationSection.DataFilePath = dataPath;
+
+                appConfigurationSection.SectionInformation.ForceSave = true;
+                config.Save(ConfigurationSaveMode.Modified);
+
+                ConfigurationManager.RefreshSection("AppConfig");
+            }
+            catch (ConfigurationErrorsException err)
+            {
+                Console.WriteLine("SaveConfigurationFile: {0}", err.ToString());
+                throw;
+            }
+
+            await _dataStore.LoadDataAsync();
         }
 
         private void OpenFileSelector()

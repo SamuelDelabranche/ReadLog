@@ -102,7 +102,8 @@ namespace ReadLog.Stores
 
         public void setDataBasePath(string dataBasePath)
         {
-            _dataService.dataBasePath = dataBasePath;
+            _dataService.setDataBasePath(dataBasePath);
         }
+
     }
 }

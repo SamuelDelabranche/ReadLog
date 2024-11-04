@@ -11,9 +11,6 @@ using System.Windows;
 
 namespace ReadLog
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
         private readonly ServiceProvider _serviceProvider;
@@ -21,14 +18,29 @@ namespace ReadLog
 
         public App()
         {
-            _services.AddSingleton<AppConfig>();
+            _services.AddSingleton(provider =>
+            {
+                var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                var appConfigSection = config.GetSection("AppConfig") as AppConfig;
+
+                if (appConfigSection == null)
+                {
+                    appConfigSection = new AppConfig();
+                }
+
+                return appConfigSection;
+            });
+
             _services.AddSingleton<IDataService<Manga>, DataService<Manga>>();
             _services.AddSingleton(provider =>
             {
                 var dataService = provider.GetRequiredService<IDataService<Manga>>();
+                var appConfig = provider.GetRequiredService<AppConfig>();
+
                 var dataStore = new DataStore<Manga>(dataService);
 
-                dataStore.setDataBasePath(provider.GetRequiredService<AppConfig>().DataFilePath);
+                dataStore.setDataBasePath(appConfig.DataFilePath);
+
                 return dataStore;
             });
 
@@ -62,10 +74,12 @@ namespace ReadLog
             System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 
             if (config.Sections["AppConfig"] == null)
-                config.Sections.Add("AppConfig", _serviceProvider.GetRequiredService<AppConfig>());
-            var appConfigSection = config.GetSection("AppConfig") as AppConfig;
-
-
+            {
+                var appConfigSection = _serviceProvider.GetRequiredService<AppConfig>();
+                config.Sections.Add("AppConfig", appConfigSection);
+                config.Save(ConfigurationSaveMode.Modified);
+                ConfigurationManager.RefreshSection("AppConfig");
+            }
 
             await InitializeDataStoreAsync();
             _serviceProvider.GetRequiredService<MainWindow>().Show();
