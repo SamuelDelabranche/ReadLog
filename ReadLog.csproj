@@ -14,9 +14,6 @@
     <None Remove="Assets\Images\unlike.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Images\logo.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />

@@ -9,9 +9,9 @@
     d:DesignHeight="450"
     d:DesignWidth="850"
     mc:Ignorable="d">
+
     <UserControl.Resources>
         <converters:BoolToImageConverter x:Key="BoolToImageConverter" />
-
         <Style TargetType="GridViewColumnHeader">
             <Setter Property="Background" Value="#53506f" />
             <Setter Property="Foreground" Value="White" />
@@ -34,9 +34,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
         <Style x:Key="ListViewAddButton" TargetType="Button">
-
             <Setter Property="Background" Value="#75719c" />
             <Setter Property="Foreground" Value="White" />
             <Setter Property="Margin" Value="5" />
@@ -70,14 +68,11 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-
         </Style>
-
         <Style x:Key="CenteredTextBlock" TargetType="TextBlock">
             <Setter Property="Foreground" Value="White" />
             <Setter Property="FontWeight" Value="SemiBold" />
         </Style>
-
         <Style TargetType="ListViewItem">
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -85,7 +80,6 @@
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderBrush" Value="DarkGray" />
             <Setter Property="BorderThickness" Value="0,0,0,0.5" />
-
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListViewItem">
@@ -98,109 +92,122 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#53506f" />
                     <Setter Property="Cursor" Value="Hand" />
                 </Trigger>
-
                 <Trigger Property="IsSelected" Value="True">
                     <Setter Property="Background" Value="#53506f" />
                 </Trigger>
             </Style.Triggers>
         </Style>
-
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+        <Style TargetType="ScrollBar">
+            <Setter Property="Width" Value="10" />
+            <Setter Property="Background" Value="#3a384d" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollBar">
+                        <Grid Background="{TemplateBinding Background}">
+                            <Track Name="PART_Track" IsDirectionReversed="true">
+                                <Track.Thumb>
+                                    <Thumb
+                                        Background="#53506f"
+                                        BorderBrush="#75719c"
+                                        BorderThickness="1" />
+                                </Track.Thumb>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
 
+    <Grid>
+        <ListView
+            Name="DataListView"
+            Margin="0"
+            Padding="10"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Background="#3a384d"
+            BorderThickness="0"
+            ItemsSource="{Binding FilteredItems, UpdateSourceTrigger=PropertyChanged}"
+            MouseDoubleClick="DataListView_MouseDoubleClick"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+            ScrollViewer.VerticalScrollBarVisibility="Auto">
 
-    <ListView
-        Name="DataListView"
-        Margin="0"
-        Padding="10"
-        HorizontalAlignment="Stretch"
-        VerticalAlignment="Stretch"
-        Background="#3a384d"
-        BorderThickness="0"
-        ItemsSource="{Binding FilteredItems, UpdateSourceTrigger=PropertyChanged}"
-        MouseDoubleClick="DataListView_MouseDoubleClick"
-        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-        SelectedItem="SelectedItem">
-        <ListView.Template>
-            <ControlTemplate TargetType="ListView">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
+            <ListView.Template>
+                <ControlTemplate TargetType="ListView">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <GridViewHeaderRowPresenter Grid.Row="0" Columns="{Binding Path=View.Columns, RelativeSource={RelativeSource TemplatedParent}}" />
+                        <Button
+                            Grid.Row="1"
+                            Command="{Binding AddMangaCommand}"
+                            Content="+"
+                            Style="{StaticResource ListViewAddButton}" />
+                        <TextBlock
+                            Grid.Row="2"
+                            DataContext="{Binding ErrorMessage}"
+                            Style="{StaticResource ErrorMessage}"
+                            Text="{Binding Content}"
+                            Visibility="{Binding HasMessage, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                        <ScrollViewer Grid.Row="3" CanContentScroll="True">
+                            <ItemsPresenter />
+                        </ScrollViewer>
+                    </Grid>
+                </ControlTemplate>
+            </ListView.Template>
 
-                    <GridViewHeaderRowPresenter Grid.Row="0" Columns="{Binding Path=View.Columns, RelativeSource={RelativeSource TemplatedParent}}" />
-
-                    <Button
-                        Grid.Row="1"
-                        Command="{Binding AddMangaCommand}"
-                        Content="+"
-                        Style="{StaticResource ListViewAddButton}" />
-
-                    <ScrollViewer Grid.Row="3" CanContentScroll="True">
-                        <ItemsPresenter />
-                    </ScrollViewer>
-                    <TextBlock
-                        Grid.Row="2"
-                        DataContext="{Binding ErrorMessage}"
-                        Style="{StaticResource ErrorMessage}"
-                        Text="{Binding Content}"
-                        Visibility="{Binding HasMessage, Converter={StaticResource BooleanToVisibilityConverter}}" />
-
-
-                </Grid>
-            </ControlTemplate>
-        </ListView.Template>
-
-        <ListView.View>
-            <GridView>
-                <GridViewColumn Width="100" Header="Favorite">
-                    <GridViewColumn.CellTemplate>
-                        <DataTemplate>
-                            <Image
-                                MaxHeight="20"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Source="{Binding IsFavorite, Converter={StaticResource BoolToImageConverter}}" />
-                        </DataTemplate>
-                    </GridViewColumn.CellTemplate>
-                </GridViewColumn>
-
-                <GridViewColumn Width="100" Header="Chapitre(s)">
-                    <GridViewColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Style="{StaticResource CenteredTextBlock}" Text="{Binding NombreChapitresLus}" />
-                        </DataTemplate>
-                    </GridViewColumn.CellTemplate>
-                </GridViewColumn>
-
-                <GridViewColumn Width="250" Header="Nom du manga">
-                    <GridViewColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Style="{StaticResource CenteredTextBlock}" Text="{Binding Name}" />
-                        </DataTemplate>
-                    </GridViewColumn.CellTemplate>
-                </GridViewColumn>
-
-                <GridViewColumn Width="400" Header="Description">
-                    <GridViewColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock
-                                Style="{StaticResource CenteredTextBlock}"
-                                Text="{Binding Description}"
-                                TextTrimming="CharacterEllipsis" />
-                        </DataTemplate>
-                    </GridViewColumn.CellTemplate>
-                </GridViewColumn>
-            </GridView>
-        </ListView.View>
-    </ListView>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="100" Header="Favorite">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image
+                                    MaxHeight="20"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Source="{Binding IsFavorite, Converter={StaticResource BoolToImageConverter}}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="100" Header="Chapitre(s)">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Style="{StaticResource CenteredTextBlock}" Text="{Binding NombreChapitresLus}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="250" Header="Nom du manga">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Style="{StaticResource CenteredTextBlock}" Text="{Binding Name}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="400" Header="Description">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock
+                                    Style="{StaticResource CenteredTextBlock}"
+                                    Text="{Binding Description}"
+                                    TextTrimming="CharacterEllipsis" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
 </UserControl>

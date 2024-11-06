@@ -364,4 +364,4 @@ FodyWeavers.xsd
 
 #Custom
 Stores/covertArt/*
-Stores/Data.json
+Stores/*.json
